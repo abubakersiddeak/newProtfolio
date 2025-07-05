@@ -14,78 +14,48 @@ const Projects = () => {
         "A full-stack e-commerce solution with React frontend and Node.js backend",
       longDescription:
         "A comprehensive e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog, shopping cart, payment integration with Stripe, order management, and admin dashboard. The application is fully responsive and includes advanced features like product search, filtering, and real-time inventory management.",
-      image:
-        "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe", "Express.js"],
-      github: "#",
-      live: "#",
+      image: "/one.png",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB",
+        "Express.js",
+      ],
+      github: "https://github.com/abubakersiddeak/WealShop2024",
+      live: "https://weal-shop2024.vercel.app/",
       category: "Full Stack",
     },
     {
       id: 2,
-      title: "Task Management App",
+      title: "Online Exam Platform",
       description:
-        "A collaborative task management application with real-time updates",
+        "A secure and user-friendly online examination platform with real-time results and automated evaluation.",
       longDescription:
-        "A modern task management application featuring real-time collaboration, drag-and-drop functionality, team workspaces, and advanced project tracking. Built with React, Socket.io for real-time features, and a Node.js backend with PostgreSQL database. Includes features like task assignment, deadline tracking, file attachments, and team communication.",
-      image:
-        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React", "Socket.io", "PostgreSQL", "Material-UI"],
-      github: "#",
-      live: "#",
-      category: "Frontend",
-    },
-    {
-      id: 3,
-      title: "Weather Dashboard",
-      description:
-        "A beautiful weather dashboard with interactive maps and forecasts",
-      longDescription:
-        "An elegant weather dashboard that provides detailed weather information, interactive maps, and extended forecasts. Features include location-based weather data, weather maps, severe weather alerts, and historical weather data visualization. Built with React, Chart.js for data visualization, and integrates with multiple weather APIs for accurate data.",
-      image:
-        "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React", "Chart.js", "Weather API", "Tailwind CSS"],
-      github: "#",
-      live: "#",
-      category: "Frontend",
-    },
-    {
-      id: 4,
-      title: "Social Media Dashboard",
-      description: "A comprehensive social media analytics dashboard",
-      longDescription:
-        "A powerful social media analytics dashboard that aggregates data from multiple platforms including Twitter, Instagram, and Facebook. Features include engagement metrics, follower growth tracking, content performance analysis, and automated reporting. Built with React, D3.js for advanced data visualization, and integrates with social media APIs.",
-      image:
-        "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React", "D3.js", "Social Media APIs", "Redux"],
-      github: "#",
-      live: "#",
+        "A modern online examination platform designed for educational institutions and training centers. The system support MCQs question format. Features include without student login, timed exams, question randomization, real-time performance tracking, instant result generation. The platform also includes an intuitive admin panel for managing students, creating exams, and monitoring exam activity. Built using React for frontend and Node.js/MongoDB for scalable backend operations, this solution ensures reliability and smooth performance even under high traffic.",
+      image: "/2.png",
+      technologies: [
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB",
+        "Express.js",
+      ],
+      github: "https://github.com/abubakersiddeak/online_exam",
+      live: "https://online-exam-nine.vercel.app/",
       category: "Full Stack",
     },
     {
-      id: 5,
-      title: "Fitness Tracker",
-      description: "A mobile-responsive fitness tracking application",
+      id: 3,
+      title: "Portfolio Website",
+      description:
+        "A clean and responsive personal portfolio website to showcase skills, projects, and experience.",
       longDescription:
-        "A comprehensive fitness tracking application that allows users to log workouts, track progress, set goals, and monitor their fitness journey. Features include exercise database, workout planning, progress visualization, social features for sharing achievements, and integration with wearable devices. Built with React Native for cross-platform compatibility.",
-      image:
-        "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React Native", "Firebase", "Chart.js", "Expo"],
-      github: "#",
-      live: "#",
-      category: "Mobile",
-    },
-    {
-      id: 6,
-      title: "Recipe Sharing Platform",
-      description: "A community-driven recipe sharing and cooking platform",
-      longDescription:
-        "A vibrant recipe sharing platform where users can discover, share, and save their favorite recipes. Features include recipe creation with step-by-step instructions, ingredient shopping lists, nutritional information, user reviews and ratings, and personalized recipe recommendations. Built with React, Node.js, and includes advanced search and filtering capabilities.",
-      image:
-        "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["React", "Node.js", "MongoDB", "Cloudinary"],
-      github: "#",
-      live: "#",
+        "A clean and responsive personal portfolio website to showcase skills, projects, and experience.",
+      image: "/3.png",
+      technologies: ["React", "Tailwind CSS", "Next.js", "Node.js"],
+      github: "https://github.com/abubakersiddeak/protfolio",
+      live: "https://effervescent-lokum-36bfa7.netlify.app/",
       category: "Full Stack",
     },
   ];
@@ -101,7 +71,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-12 sm:py-16 md:py-20 bg-black/60 transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 bg-black/60 font-mono transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
@@ -120,9 +90,9 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === category
-                    ? "bg-indigo-600 dark:bg-indigo-600 text-white"
+                    ? "bg-indigo-600 text-white shadow-lg dark:bg-cyan-600"
                     : "bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg"
                 }`}
               >
@@ -143,7 +113,7 @@ const Projects = () => {
                     alt={project.title}
                     className="w-full h-40 sm:h-48 object-cover"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <button
                       onClick={() => setSelectedProject(project)}
                       className="opacity-0 group-hover:opacity-100 bg-indigo-600 dark:bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
@@ -168,7 +138,7 @@ const Projects = () => {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full border border-indigo-500/20 dark:border-indigo-500/20"
+                        className="text-xs bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20"
                       >
                         {tech}
                       </span>
@@ -229,7 +199,7 @@ const Projects = () => {
                   {selectedProject.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-indigo-500/20 dark:border-indigo-500/20 text-sm"
+                      className="bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-3 sm:px-4 py-1 sm:py-2 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 text-sm"
                     >
                       {tech}
                     </span>

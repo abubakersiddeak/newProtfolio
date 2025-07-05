@@ -115,7 +115,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-16 sm:py-20 md:py-24 bg-black/65 transition-colors duration-500 font-sans"
+      className="py-16 sm:py-20 md:py-24 bg-black/65 transition-colors duration-500 font-mono"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -138,11 +138,11 @@ const Skills = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2 rounded-xl font-semibold text-base sm:text-lg transition-all cursor-pointer duration-300
+                className={`px-6 py-2 rounded-xl font-semibold text-base sm:text-lg  transition-all cursor-pointer duration-300
                   ${
                     activeTab === tab
-                      ? "bg-indigo-600 text-white shadow-lg dark:bg-indigo-500"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                      ? "bg-indigo-600 text-white shadow-lg dark:bg-cyan-600"
+                      : "bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-600"
                   }`}
                 role="tab" // Accessibility: Tab role
                 aria-selected={activeTab === tab} // Accessibility: Selected state

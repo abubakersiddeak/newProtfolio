@@ -4,7 +4,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-black/70 transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-black/70 font-mono transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
@@ -44,19 +44,19 @@ const About = () => {
               </h3>
               <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
                 A passionate Wev Developer who crafts dynamic and interactive
-                web applications .
+                web applications.
               </p>
               <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
                 I work with a variety of technologies including JavaScript,
                 React, Node.js, and modern design tools to deliver exceptional
                 digital experiences. I take full ownership of the development
-                process — from concept to deployment .
+                process — from concept to deployment.
               </p>
               <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
                 I am committed to effective remote collaboration, clear and
                 consistent communication, and delivering high-quality results on
                 time. I look forward to bringing your ideas to life with
-                precision and passion .
+                precision and passion.
               </p>
 
               {/* Personal stats - Responsive Grid */}

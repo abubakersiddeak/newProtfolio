@@ -50,7 +50,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-12 sm:py-16 md:py-20 bg-black/55 transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 font-mono bg-black/55 transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
