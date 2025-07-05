@@ -7,7 +7,7 @@ import {
   FaLinkedin,
   FaFacebook,
 } from "react-icons/fa";
-import ThemeButton from "./ThemeButton";
+// import ThemeButton from "./ThemeButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,7 +68,7 @@ const Header = () => {
         <div className="hidden lg:flex items-center space-x-4">
           {/* Theme Toggle */}
 
-          <ThemeButton />
+          {/* <ThemeButton /> */}
 
           {/* Social Links */}
           <div className="flex space-x-3 cursor-pointer">
@@ -103,7 +103,7 @@ const Header = () => {
         {/* Mobile Actions */}
         <div className="flex lg:hidden items-center space-x-3">
           {/* Mobile Theme Toggle */}
-          <ThemeButton />
+          {/* <ThemeButton /> */}
 
           {/* Mobile Menu Button */}
           <button
