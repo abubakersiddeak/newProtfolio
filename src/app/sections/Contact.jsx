@@ -50,22 +50,15 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-800 transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 bg-black/55 transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
-              Get In{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">
-                Touch
-              </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
+              Get In Touch
             </h2>
             <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-base sm:text-xl text-slate-700 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-              Have a project in mind? Let's work together to bring your ideas to
-              life.
-            </p>
           </div>
         </AnimatedSection>
 
@@ -87,7 +80,7 @@ const Contact = () => {
                       Email
                     </h4>
                     <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
-                      john.doe@example.com
+                      abubakersiddeak@gmail.com
                     </p>
                   </div>
                 </div>
@@ -101,7 +94,10 @@ const Contact = () => {
                       Phone
                     </h4>
                     <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
-                      +1 (555) 123-4567
+                      +880 1560045388
+                    </p>
+                    <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
+                      +880 1790884776
                     </p>
                   </div>
                 </div>
@@ -115,7 +111,7 @@ const Contact = () => {
                       Location
                     </h4>
                     <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
-                      San Francisco, CA
+                      Dhaka, Bangladesh
                     </p>
                   </div>
                 </div>

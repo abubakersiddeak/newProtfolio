@@ -101,22 +101,15 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-slate-900 transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 bg-black/60 transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
-              My{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">
-                Projects
-              </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
+              My Projects
             </h2>
             <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-base sm:text-xl text-slate-700 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-              Here are some of my recent projects that showcase my skills and
-              creativity.
-            </p>
           </div>
         </AnimatedSection>
 

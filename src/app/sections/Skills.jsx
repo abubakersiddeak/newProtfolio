@@ -1,112 +1,190 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import AnimatedSection from "../components/AnimatedSection";
+import { VscVscode } from "react-icons/vsc";
+import {
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaGitAlt,
+  FaFigma,
+  FaWindows,
+  FaUbuntu,
+} from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiJavascript,
+  SiMongodb,
+  SiNpm,
+  SiExpress,
+  SiAuth0,
+  SiKalilinux,
+  SiGimp,
+  SiInkscape, // Import Inkscape
+} from "react-icons/si";
+import { TbBrandFramerMotion } from "react-icons/tb";
 
 const Skills = () => {
-  const [animatedSkills, setAnimatedSkills] = useState({});
+  const [activeTab, setActiveTab] = useState("Web");
 
-  const skills = [
-    { name: "React", level: 90, color: "bg-indigo-500 dark:bg-indigo-500" },
-    {
-      name: "JavaScript",
-      level: 85,
-      color: "bg-purple-500 dark:bg-purple-500",
-    },
-    { name: "Node.js", level: 80, color: "bg-blue-500 dark:bg-blue-500" },
-    { name: "Python", level: 75, color: "bg-indigo-600 dark:bg-indigo-600" },
-    { name: "CSS/SCSS", level: 90, color: "bg-purple-600 dark:bg-purple-600" },
-    { name: "MongoDB", level: 70, color: "bg-blue-600 dark:bg-blue-600" },
-    { name: "Git", level: 85, color: "bg-indigo-500 dark:bg-indigo-500" },
-    { name: "Docker", level: 65, color: "bg-purple-400 dark:bg-purple-400" },
-  ];
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const animated = {};
-      skills.forEach((skill, index) => {
-        setTimeout(() => {
-          animated[skill.name] = skill.level;
-          setAnimatedSkills((prev) => ({ ...prev, [skill.name]: skill.level }));
-        }, index * 200);
-      });
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
+  // 🧠 Skill category and icon color
+  const skillCategories = useMemo(
+    () => ({
+      Web: [
+        { name: "React", icon: <FaReact className="text-sky-500" /> },
+        {
+          name: "TailwindCSS",
+          icon: <SiTailwindcss className="text-cyan-400" />,
+        },
+        {
+          name: "Framer Motion",
+          icon: (
+            <TbBrandFramerMotion className="text-purple-500" />
+          ) /* Changed color for better visibility */,
+        },
+        {
+          name: "Next.JS",
+          icon: <SiNextdotjs className="text-gray-900 dark:text-white" />,
+        },
+        {
+          name: "JavaScript",
+          icon: <SiJavascript className="text-yellow-400" />,
+        },
+        { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+        {
+          name: "Express.JS",
+          icon: (
+            <SiExpress className="text-gray-800 dark:text-gray-200" />
+          ) /* Adjusted for dark mode */,
+        },
+        { name: "Auth.JS", icon: <SiAuth0 className="text-orange-500" /> },
+        { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
+      ],
+      Programming: [
+        {
+          name: "JavaScript",
+          icon: <SiJavascript className="text-yellow-400" />,
+        },
+        { name: "Python", icon: <FaPython className="text-blue-400" /> },
+        { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+      ],
+      Tools: [
+        { name: "Git", icon: <FaGitAlt className="text-orange-600" /> },
+        { name: "VS Code", icon: <VscVscode className="text-blue-600" /> },
+        { name: "NPM/Yarn", icon: <SiNpm className="text-red-600" /> },
+        { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
+        {
+          name: "Gimp",
+          icon: (
+            <SiGimp className="text-sky-500 dark:text-sky-300" />
+          ) /* Adjusted color */,
+        },
+        {
+          name: "Inkscape",
+          icon: (
+            <SiInkscape className="text-indigo-500 dark:text-indigo-300" />
+          ) /* Adjusted color and name */,
+        },
+      ],
+      "Operating Systems": [
+        // More descriptive tab name
+        {
+          name: "Ubuntu",
+          icon: (
+            <FaUbuntu className="text-orange-500 dark:text-orange-300" />
+          ) /* Adjusted color */,
+        },
+        {
+          name: "Kali Linux",
+          icon: (
+            <SiKalilinux className="text-blue-500 dark:text-blue-300" />
+          ) /* Adjusted color */,
+        },
+        {
+          name: "Windows",
+          icon: (
+            <FaWindows className="text-cyan-500 dark:text-cyan-300" />
+          ) /* Adjusted color */,
+        },
+      ],
+    }),
+    []
+  );
 
   return (
     <section
       id="skills"
-      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-800 transition-colors duration-300"
+      className="py-16 sm:py-20 md:py-24 bg-black/65 transition-colors duration-500 font-sans"
     >
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
-              My{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">
-                Skills
-              </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
+              My Skills
             </h2>
-            <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-base sm:text-xl text-slate-700 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-              Here are the technologies and tools I work with to create amazing
-              digital experiences.
-            </p>
+            <div className="w-20 sm:w-28 h-1.5 bg-indigo-600 dark:bg-indigo-400 mx-auto rounded-full mb-8"></div>
           </div>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
-          {skills.map((skill, index) => (
-            <AnimatedSection key={skill.name} delay={index * 100}>
-              <div className="bg-gray-50 dark:bg-slate-900 p-4 sm:p-6 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg">
-                <div className="flex justify-between items-center mb-3 sm:mb-4">
-                  <h3 className="text-slate-900 dark:text-white font-semibold text-base sm:text-lg">
-                    {skill.name}
-                  </h3>
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm sm:text-base">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 sm:h-3">
-                  <div
-                    className={`h-2 sm:h-3 rounded-full transition-all duration-1000 ease-out ${skill.color}`}
-                    style={{ width: `${animatedSkills[skill.name] || 0}%` }}
-                  ></div>
-                </div>
+        {/* Tabs */}
+        <AnimatedSection delay={200}>
+          <div
+            className="flex justify-center flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14 max-w-4xl mx-auto"
+            role="tablist" // Accessibility: Tab list role
+          >
+            {Object.keys(skillCategories).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-2 rounded-xl font-semibold text-base sm:text-lg transition-all cursor-pointer duration-300
+                  ${
+                    activeTab === tab
+                      ? "bg-indigo-600 text-white shadow-lg dark:bg-indigo-500"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                  }`}
+                role="tab" // Accessibility: Tab role
+                aria-selected={activeTab === tab} // Accessibility: Selected state
+                aria-controls={`panel-${tab}`} // Accessibility: Link to tab panel (if you had one)
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        {/* Skill Cards */}
+        <div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7 max-w-4xl mx-auto"
+          id={`panel-${activeTab}`} // Accessibility: Tab panel ID
+          role="tabpanel" // Accessibility: Tab panel role
+        >
+          {(skillCategories[activeTab] || []).map((skill, index) => (
+            <AnimatedSection
+              key={`${skill.name}-${index}`}
+              delay={index * 50 + 400}
+            >
+              <div
+                className=" bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed border-gray-200 dark:border-gray-700 shadow-lg flex items-center space-x-4
+                          hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer"
+              >
+                {" "}
+                {/* Added hover effect */}
+                <div className=" text-5xl">{skill.icon}</div>
+                <h3 className="text-gray-900 dark:text-white font-semibold text-lg sm:text-xl">
+                  {skill.name}
+                </h3>
               </div>
             </AnimatedSection>
           ))}
+          {/* Optional: Empty state message */}
+          {(skillCategories[activeTab] || []).length === 0 && (
+            <p className="text-center text-gray-600 dark:text-gray-400 col-span-full">
+              No skills listed for this category yet.
+            </p>
+          )}
         </div>
-
-        <AnimatedSection delay={800}>
-          <div className="text-center mt-12 sm:mt-16">
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6 sm:mb-8">
-              Additional Expertise
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
-              {[
-                "Responsive Design",
-                "RESTful APIs",
-                "GraphQL",
-                "Testing",
-                "Agile/Scrum",
-                "CI/CD",
-                "Cloud Services",
-                "Performance Optimization",
-              ].map((expertise) => (
-                <div
-                  key={expertise}
-                  className="bg-gray-50 dark:bg-slate-900 p-3 sm:p-4 rounded-lg text-center border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg"
-                >
-                  <span className="text-slate-700 dark:text-gray-300 text-xs sm:text-sm">
-                    {expertise}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
       </div>
     </section>
   );

@@ -6,14 +6,12 @@ import {
   FaGithub,
   FaLinkedin,
   FaFacebook,
-  FaSun,
-  FaMoon,
 } from "react-icons/fa";
+import ThemeButton from "./ThemeButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,33 +21,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark]);
-
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
-  };
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
   };
 
   return (
@@ -64,14 +41,12 @@ const Header = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 opacity-50"></div>
 
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center relative z-10">
-        <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 animate-pulse">
+        <div className="text-xl sm:text-2xl font-extrabold text-cyan-400">
           <span className="text-cyan-400 dark:text-cyan-400 font-mono">
             &lt;
           </span>
           DevZisan
-          <span className="text-pink-400 dark:text-pink-400 font-mono">
-            /&gt;
-          </span>
+          <span className=" font-mono">/&gt;</span>
         </div>
 
         {/* Desktop Navigation */}
@@ -92,17 +67,8 @@ const Header = () => {
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-4">
           {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-3 cursor-pointer rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/30 dark:border-cyan-400/30 hover:from-cyan-500/30 hover:to-purple-500/30 transition-all duration-300 group"
-            aria-label="Toggle theme"
-          >
-            {isDark ? (
-              <FaSun className="text-yellow-400 text-lg group-hover:rotate-180 transition-transform duration-500" />
-            ) : (
-              <FaMoon className="text-purple-400 text-lg group-hover:rotate-12 transition-transform duration-500" />
-            )}
-          </button>
+
+          <ThemeButton />
 
           {/* Social Links */}
           <div className="flex space-x-3 cursor-pointer">
@@ -137,17 +103,7 @@ const Header = () => {
         {/* Mobile Actions */}
         <div className="flex lg:hidden items-center space-x-3">
           {/* Mobile Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-sm border border-cyan-400/30 dark:border-cyan-400/30 hover:from-cyan-500/30 hover:to-purple-500/30 transition-all duration-300"
-            aria-label="Toggle theme"
-          >
-            {isDark ? (
-              <FaSun className="text-yellow-400 text-base" />
-            ) : (
-              <FaMoon className="text-purple-400 text-base" />
-            )}
-          </button>
+          <ThemeButton />
 
           {/* Mobile Menu Button */}
           <button
