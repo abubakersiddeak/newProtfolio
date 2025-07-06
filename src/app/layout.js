@@ -4,7 +4,7 @@ export const metadata = {
   title: "DevZisan | Web Developer",
   description:
     "A passionate Web Developer skilled in modern web technologies like React, Next.js, Node.js, MongoDB, and Tailwind CSS. Specialize in building SEO-friendly, fully responsive, and high-performance websites and web applications.",
-
+  metadataBase: new URL("https://new-protfolio-one.vercel.app/"),
   keywords: [
     "DevZisan",
     "Full Stack Developer",
