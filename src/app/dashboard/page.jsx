@@ -40,7 +40,6 @@ import { TbBrandFramerMotion } from "react-icons/tb";
 import { VscVscode } from "react-icons/vsc";
 
 export default function Page() {
-  // Changed function name to Page for consistency if it's a file for a Next.js page
   const [activeSection, setActiveSection] = useState("dashboard");
 
   // Initial dummy data for local state
