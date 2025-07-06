@@ -8,7 +8,7 @@ import Skills from "./sections/Skills";
 
 export default function Home() {
   return (
-    <div className="App bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className=" bg-slate-900 transition-colors duration-300">
       <Header />
       <Hero />
       <About />
