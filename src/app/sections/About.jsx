@@ -4,7 +4,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-black/70 font-mono transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-20 bg-black/70 font-mono transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
@@ -12,7 +12,7 @@ const About = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
               About Me
             </h2>
-            <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto"></div>
+            <div className="w-16 sm:w-24 h-1 bg-indigo-400 mx-auto"></div>
           </div>
         </AnimatedSection>
 
@@ -21,9 +21,9 @@ const About = () => {
             <div className="relative flex justify-center">
               {/* Professional photo - Responsive Square */}
               <div className="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto relative">
-                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-600 rounded-2xl sm:rounded-3xl animate-pulse transform rotate-2 sm:rotate-3"></div>
-                <div className="absolute inset-0 bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl transform -rotate-1 sm:-rotate-2 shadow-2xl">
-                  <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-indigo-500/20 dark:border-indigo-500/20">
+                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-indigo-400 to-purple-600 rounded-2xl sm:rounded-3xl animate-pulse transform rotate-2 sm:rotate-3"></div>
+                <div className="absolute inset-0 bg-slate-800 rounded-2xl sm:rounded-3xl transform -rotate-1 sm:-rotate-2 shadow-2xl">
+                  <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-indigo-500/20">
                     <img
                       src="./mepo1.jpg"
                       alt="John Doe - Professional Photo"
@@ -39,20 +39,20 @@ const About = () => {
 
           <AnimatedSection delay={400}>
             <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
                 ABU BAKAR SIDDIK ZISAN
               </h3>
-              <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 A passionate Wev Developer who crafts dynamic and interactive
                 web applications.
               </p>
-              <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 I work with a variety of technologies including JavaScript,
                 React, Node.js, and modern design tools to deliver exceptional
                 digital experiences. I take full ownership of the development
                 process — from concept to deployment.
               </p>
-              <p className="text-slate-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 I am committed to effective remote collaboration, clear and
                 consistent communication, and delivering high-quality results on
                 time. I look forward to bringing your ideas to life with

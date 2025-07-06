@@ -45,7 +45,7 @@ const Skills = () => {
         },
         {
           name: "Next.JS",
-          icon: <SiNextdotjs className="text-gray-900 dark:text-white" />,
+          icon: <SiNextdotjs className="text-white" />,
         },
         {
           name: "JavaScript",
@@ -54,9 +54,7 @@ const Skills = () => {
         { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
         {
           name: "Express.JS",
-          icon: (
-            <SiExpress className="text-gray-800 dark:text-gray-200" />
-          ) /* Adjusted for dark mode */,
+          icon: <SiExpress className="text-gray-200" />,
         },
         { name: "Auth.JS", icon: <SiAuth0 className="text-orange-500" /> },
         { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
@@ -76,14 +74,12 @@ const Skills = () => {
         { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
         {
           name: "Gimp",
-          icon: (
-            <SiGimp className="text-sky-500 dark:text-sky-300" />
-          ) /* Adjusted color */,
+          icon: <SiGimp className="text-sky-300" /> /* Adjusted color */,
         },
         {
           name: "Inkscape",
           icon: (
-            <SiInkscape className="text-indigo-500 dark:text-indigo-300" />
+            <SiInkscape className="text-indigo-300" />
           ) /* Adjusted color and name */,
         },
       ],
@@ -91,21 +87,15 @@ const Skills = () => {
         // More descriptive tab name
         {
           name: "Ubuntu",
-          icon: (
-            <FaUbuntu className="text-orange-500 dark:text-orange-300" />
-          ) /* Adjusted color */,
+          icon: <FaUbuntu className="text-orange-300" /> /* Adjusted color */,
         },
         {
           name: "Kali Linux",
-          icon: (
-            <SiKalilinux className="text-blue-500 dark:text-blue-300" />
-          ) /* Adjusted color */,
+          icon: <SiKalilinux className="text-blue-300" /> /* Adjusted color */,
         },
         {
           name: "Windows",
-          icon: (
-            <FaWindows className="text-cyan-500 dark:text-cyan-300" />
-          ) /* Adjusted color */,
+          icon: <FaWindows className="text-cyan-300" /> /* Adjusted color */,
         },
       ],
     }),
@@ -124,7 +114,7 @@ const Skills = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
               My Skills
             </h2>
-            <div className="w-20 sm:w-28 h-1.5 bg-indigo-600 dark:bg-indigo-400 mx-auto rounded-full mb-8"></div>
+            <div className="w-20 sm:w-28 h-1.5 bg-indigo-400 mx-auto rounded-full mb-8"></div>
           </div>
         </AnimatedSection>
 
@@ -141,8 +131,8 @@ const Skills = () => {
                 className={`px-6 py-2 rounded-xl font-semibold text-base sm:text-lg  transition-all cursor-pointer duration-300
                   ${
                     activeTab === tab
-                      ? "bg-indigo-600 text-white shadow-lg dark:bg-cyan-600"
-                      : "bg-gray-200 text-gray-600 hover:bg-gray-300 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-600"
+                      ? " text-white shadow-lg bg-cyan-600"
+                      : "   bg-gray-900 text-white hover:bg-gray-600"
                   }`}
                 role="tab" // Accessibility: Tab role
                 aria-selected={activeTab === tab} // Accessibility: Selected state
@@ -166,13 +156,13 @@ const Skills = () => {
               delay={index * 50 + 400}
             >
               <div
-                className=" bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed border-gray-200 dark:border-gray-700 shadow-lg flex items-center space-x-4
+                className=" bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed border-gray-700 shadow-lg flex items-center space-x-4
                           hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 {" "}
                 {/* Added hover effect */}
                 <div className=" text-5xl">{skill.icon}</div>
-                <h3 className="text-gray-900 dark:text-white font-semibold text-lg sm:text-xl">
+                <h3 className="text-white font-semibold text-lg sm:text-xl">
                   {skill.name}
                 </h3>
               </div>
@@ -180,7 +170,7 @@ const Skills = () => {
           ))}
           {/* Optional: Empty state message */}
           {(skillCategories[activeTab] || []).length === 0 && (
-            <p className="text-center text-gray-600 dark:text-gray-400 col-span-full">
+            <p className="text-center text-gray-400 col-span-full">
               No skills listed for this category yet.
             </p>
           )}

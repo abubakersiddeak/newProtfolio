@@ -79,7 +79,7 @@ const Projects = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
               My Projects
             </h2>
-            <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
+            <div className="w-16 sm:w-24 h-1 bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
           </div>
         </AnimatedSection>
 
@@ -92,8 +92,8 @@ const Projects = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === category
-                    ? "bg-indigo-600 text-white shadow-lg dark:bg-cyan-600"
-                    : "bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg"
+                    ? " text-white shadow-lg bg-cyan-600"
+                    : " bg-slate-800 text-gray-300 hover:bg-slate-700 border border-indigo-500/20 shadow-lg"
                 }`}
               >
                 {category}
@@ -106,7 +106,7 @@ const Projects = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
             <AnimatedSection key={project.id} delay={index * 100}>
-              <div className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg">
+              <div className="bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed  overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer  border-indigo-500/20 shadow-lg">
                 <div className="relative group">
                   <img
                     src={project.image}
@@ -116,7 +116,7 @@ const Projects = () => {
                   <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="opacity-0 group-hover:opacity-100 bg-indigo-600 dark:bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
+                      className="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
                     >
                       View Details
                     </button>
@@ -124,21 +124,21 @@ const Projects = () => {
                 </div>
                 <div className="p-4 sm:p-6">
                   <div className="flex justify-between items-start mb-3 sm:mb-4">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
                       {project.title}
                     </h3>
-                    <span className="text-xs bg-indigo-600 dark:bg-indigo-600 text-white px-2 py-1 rounded">
+                    <span className="text-xs bg-indigo-600 text-white px-2 py-1 rounded">
                       {project.category}
                     </span>
                   </div>
-                  <p className="text-slate-700 dark:text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
+                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20"
+                        className="text-xs bg-slate-700 text-gray-300 px-2 sm:px-3 py-1 rounded-lg border border-indigo-500/20"
                       >
                         {tech}
                       </span>
@@ -147,14 +147,14 @@ const Projects = () => {
                   <div className="flex justify-between">
                     <a
                       href={project.github}
-                      className="flex items-center text-slate-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm sm:text-base"
+                      className="flex items-center text-gray-300 hover:text-indigo-400 transition-colors text-sm sm:text-base"
                     >
                       <FaGithub className="mr-1 sm:mr-2" />
                       Code
                     </a>
                     <a
                       href={project.live}
-                      className="flex items-center text-slate-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-sm sm:text-base"
+                      className="flex items-center text-gray-300 hover:text-indigo-400 transition-colors text-sm sm:text-base"
                     >
                       <FaExternalLinkAlt className="mr-1 sm:mr-2" />
                       Live Demo
@@ -169,7 +169,7 @@ const Projects = () => {
         {/* Project Modal - Responsive */}
         {selectedProject && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-indigo-500/20 dark:border-indigo-500/20">
+            <div className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-indigo-500/20">
               <div className="relative">
                 <img
                   src={selectedProject.image}
@@ -185,21 +185,21 @@ const Projects = () => {
               </div>
               <div className="p-4 sm:p-6 md:p-8">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
                     {selectedProject.title}
                   </h3>
-                  <span className="bg-indigo-600 dark:bg-indigo-600 text-white px-3 py-1 rounded text-sm self-start">
+                  <span className="bg-indigo-600 text-white px-3 py-1 rounded text-sm self-start">
                     {selectedProject.category}
                   </span>
                 </div>
-                <p className="text-slate-700 dark:text-gray-300 mb-4 sm:mb-6 text-sm sm:text-lg leading-relaxed">
+                <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-lg leading-relaxed">
                   {selectedProject.longDescription}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                   {selectedProject.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-gray-100 dark:bg-slate-700 text-slate-700 dark:text-gray-300 px-3 sm:px-4 py-1 sm:py-2 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 text-sm"
+                      className="bg-slate-700 text-gray-300 px-3 sm:px-4 py-1 sm:py-2 rounded-lg border border-indigo-500/20 text-sm"
                     >
                       {tech}
                     </span>
@@ -208,14 +208,14 @@ const Projects = () => {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <a
                     href={selectedProject.github}
-                    className="flex items-center justify-center bg-gray-100 dark:bg-slate-700 text-slate-900 dark:text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors border border-indigo-500/20 dark:border-indigo-500/20 text-sm sm:text-base"
+                    className="flex items-center justify-center bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg :hover:bg-slate-600 transition-colors border border-indigo-500/20 text-sm sm:text-base"
                   >
                     <FaGithub className="mr-2" />
                     View Code
                   </a>
                   <a
                     href={selectedProject.live}
-                    className="flex items-center justify-center bg-indigo-600 dark:bg-indigo-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-700 transition-colors text-sm sm:text-base"
+                    className="flex items-center justify-center bg-indigo-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base"
                   >
                     <FaExternalLinkAlt className="mr-2" />
                     Live Demo

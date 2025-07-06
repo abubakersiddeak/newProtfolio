@@ -58,7 +58,7 @@ const Contact = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
               Get In Touch
             </h2>
-            <div className="w-16 sm:w-24 h-1 bg-indigo-600 dark:bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
+            <div className="w-16 sm:w-24 h-1 bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
           </div>
         </AnimatedSection>
 
@@ -66,58 +66,58 @@ const Contact = () => {
           {/* Contact Information */}
           <AnimatedSection delay={200}>
             <div className="space-y-6 sm:space-y-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                 Let's Connect
               </h3>
 
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 dark:bg-indigo-600 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 rounded-full flex items-center justify-center">
                     <FaEnvelope className="text-white text-sm sm:text-base" />
                   </div>
                   <div>
-                    <h4 className="text-slate-900 dark:text-white font-semibold text-sm sm:text-base">
+                    <h4 className="text-white font-semibold text-sm sm:text-base">
                       Email
                     </h4>
-                    <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
+                    <p className="text-gray-300 text-sm sm:text-base">
                       abubakersiddeak@gmail.com
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 dark:bg-purple-600 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 rounded-full flex items-center justify-center">
                     <FaPhone className="text-white text-sm sm:text-base" />
                   </div>
                   <div>
-                    <h4 className="text-slate-900 dark:text-white font-semibold text-sm sm:text-base">
+                    <h4 className="text-white font-semibold text-sm sm:text-base">
                       Phone
                     </h4>
-                    <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
+                    <p className="text-gray-300 text-sm sm:text-base">
                       +880 1560045388
                     </p>
-                    <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
+                    <p className="text-gray-300 text-sm sm:text-base">
                       +880 1790884776
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 dark:bg-blue-600 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center">
                     <FaMapMarkerAlt className="text-white text-sm sm:text-base" />
                   </div>
                   <div>
-                    <h4 className="text-slate-900 dark:text-white font-semibold text-sm sm:text-base">
+                    <h4 className="text-white font-semibold text-sm sm:text-base">
                       Location
                     </h4>
-                    <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">
+                    <p className="text-gray-300 text-sm sm:text-base">
                       Dhaka, Bangladesh
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-6 sm:pt-8">
+              {/* <div className="pt-6 sm:pt-8">
                 <h4 className="text-slate-900 dark:text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
                   Follow Me
                 </h4>
@@ -141,14 +141,14 @@ const Contact = () => {
                     <FaTwitter className="text-slate-700 dark:text-white hover:text-white text-sm sm:text-base" />
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </AnimatedSection>
 
           {/* Contact Form */}
           <AnimatedSection delay={400}>
-            <div className="bg-gray-50 dark:bg-slate-900 p-4 sm:p-6 md:p-8 rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 shadow-lg">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
+            <div className="bg-slate-900 p-4 sm:p-6 md:p-8 rounded-lg border border-indigo-500/20 shadow-lg">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                 Send Message
               </h3>
 
@@ -156,8 +156,8 @@ const Contact = () => {
                 <div
                   className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg text-sm sm:text-base ${
                     submitMessage.includes("Thank you")
-                      ? "bg-indigo-600 dark:bg-indigo-600"
-                      : "bg-red-600 dark:bg-red-600"
+                      ? "bg-indigo-600"
+                      : "bg-red-600"
                   } text-white`}
                 >
                   {submitMessage}
@@ -169,7 +169,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
+                      className="block text-white font-semibold mb-2 text-sm sm:text-base"
                     >
                       Your Name
                     </label>
@@ -180,13 +180,13 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 focus:border-indigo-400 dark:focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800 text-slate-900  rounded-lg border border-indigo-500/20 focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
+                      className="block text-white font-semibold mb-2 text-sm sm:text-base"
                     >
                       Your Email
                     </label>
@@ -197,7 +197,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 focus:border-indigo-400 dark:focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800 text-white rounded-lg border border-indigo-500/20 focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
                     />
                   </div>
                 </div>
@@ -205,7 +205,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
+                    className="block text-white font-semibold mb-2 text-sm sm:text-base"
                   >
                     Subject
                   </label>
@@ -216,14 +216,14 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 focus:border-indigo-400 dark:focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800 text-white rounded-lg border border-indigo-500/20 focus:border-indigo-400 focus:outline-none transition-colors text-sm sm:text-base"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base"
+                    className="block text-white font-semibold mb-2 text-sm sm:text-base"
                   >
                     Message
                   </label>
@@ -234,14 +234,14 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="5"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg border border-indigo-500/20 dark:border-indigo-500/20 focus:border-indigo-400 dark:focus:border-indigo-400 focus:outline-none transition-colors resize-none text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800 text-white rounded-lg border border-indigo-500/20 focus:border-indigo-400 focus:outline-none transition-colors resize-none text-sm sm:text-base"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                  className="w-full cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>

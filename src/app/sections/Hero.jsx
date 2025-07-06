@@ -70,12 +70,12 @@ const Hero = () => {
             <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-4 sm:mb-6 leading-tight font-mono">
               ABU_BAKAR SDDIK ZISAN
             </h1>
-            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 dark:text-gray-300 mb-6 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
-              <span className="text-cyan-400 dark:text-cyan-400">&gt; </span>
+            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
+              <span className="text-cyan-400">&gt; </span>
               <span className="text-gray-300 ">{displayText}</span>
               <span className="animate-pulse text-cyan-400">█</span>
             </div>
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
               Crafting immersive, visually stunning, and high-performance web
               experiences.
             </p>
@@ -96,7 +96,7 @@ const Hero = () => {
                     .getElementById("contact")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="cursor-pointer relative border-2 border-cyan-400 dark:border-cyan-400 text-cyan-400 dark:text-cyan-400 hover:bg-cyan-400/10 dark:hover:bg-cyan-400/10 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base font-mono group overflow-hidden"
+                className="cursor-pointer relative border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base font-mono group overflow-hidden"
               >
                 <span className="relative z-10">Quick Contact</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -156,7 +156,7 @@ const Hero = () => {
                 </div>
 
                 {/* Status indicators */}
-                <div className="absolute -top-0 -right-0 bg-green-600  dark:text-white text-black px-3 py-1 rounded-sm rounded-tr-2xl text-xs font-mono font-bold shadow-lg ">
+                <div className="absolute -top-0 -right-0 bg-green-600  text-white px-3 py-1 rounded-sm rounded-tr-2xl text-xs font-mono font-extrabold shadow-lg ">
                   Available For Work
                 </div>
               </div>
@@ -168,7 +168,7 @@ const Hero = () => {
       {/* Futuristic Scroll Indicator */}
       <button
         onClick={scrollToNext}
-        className="cursor-pointer absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-cyan-400 dark:text-cyan-400 animate-bounce group"
+        className="cursor-pointer absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
       >
         <div className="flex flex-col items-center">
           <div className="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">

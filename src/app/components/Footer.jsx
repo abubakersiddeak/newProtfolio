@@ -5,13 +5,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 dark:bg-slate-900 py-8 font-mono  sm:py-12">
+    <footer className="bg-slate-900 py-8 font-mono  sm:py-12">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Brand */}
           <div className="text-center sm:text-left">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
-              <span className="text-indigo-400 dark:text-indigo-400">Dev</span>
+              <span className="text-indigo-400">Dev</span>
               Zisan
             </h3>
             <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
@@ -21,19 +21,19 @@ const Footer = () => {
             <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4">
               <a
                 href="https://github.com/abubakersiddeak"
-                className="text-gray-400 hover:text-indigo-400 dark:hover:text-indigo-400 transition-colors"
+                className="text-gray-400 hover:text-indigo-400 transition-colors"
               >
                 <FaGithub size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/abubaker-siddik-zisan/"
-                className="text-gray-400 hover:text-indigo-400 dark:hover:text-indigo-400 transition-colors"
+                className="text-gray-400 hover:text-indigo-400 transition-colors"
               >
                 <FaLinkedin size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
                 href="https://www.facebook.com/abubakar.siddeak"
-                className="text-gray-400 hover:text-indigo-400 dark:hover:text-indigo-400 transition-colors"
+                className="text-gray-400 hover:text-indigo-400 transition-colors"
               >
                 <FaFacebook size={18} className="sm:w-5 sm:h-5" />
               </a>
@@ -58,7 +58,7 @@ const Footer = () => {
                           section.scrollIntoView({ behavior: "smooth" });
                         }
                       }}
-                      className="text-gray-400 hover:text-indigo-400 dark:hover:text-indigo-400 transition-colors text-sm sm:text-base"
+                      className="text-gray-400 cursor-pointer hover:text-indigo-400 transition-colors text-sm sm:text-base"
                     >
                       {link}
                     </button>

@@ -33,7 +33,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-black/80 dark:bg-black/90 backdrop-blur-xl border-b border-cyan-500/30 shadow-2xl shadow-cyan-500/20"
+          ? "bg-black/90 backdrop-blur-xl border-b border-cyan-500/30 shadow-2xl shadow-cyan-500/20"
           : "bg-transparent"
       }`}
     >
@@ -42,9 +42,7 @@ const Header = () => {
 
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center relative z-10">
         <div className="text-xl sm:text-2xl font-extrabold text-cyan-400">
-          <span className="text-cyan-400 dark:text-cyan-400 font-mono">
-            &lt;
-          </span>
+          <span className="text-cyan-400 font-mono">&lt;</span>
           DevZisan
           <span className=" font-mono">/&gt;</span>
         </div>
@@ -55,7 +53,7 @@ const Header = () => {
             <button
               key={item}
               onClick={() => scrollToSection(item)}
-              className="relative text-cyan-300 dark:text-cyan-300 hover:text-white dark:hover:text-white transition-all duration-300 capitalize text-sm xl:text-base font-mono group cursor-pointer"
+              className="relative text-cyan-300 hover:text-white transition-all duration-300 capitalize text-sm xl:text-base font-mono group cursor-pointer"
             >
               <span className="relative z-10">{item}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-sm"></div>
@@ -92,7 +90,7 @@ const Header = () => {
               <a
                 key={index}
                 href={link}
-                className={`text-gray-300 dark:text-gray-300 ${color} transition-all duration-300 transform hover:scale-110 hover:rotate-12`}
+                className={`text-gray-300 ${color} transition-all duration-300 transform hover:scale-110 hover:rotate-12`}
               >
                 <Icon size={18} />
               </a>
@@ -108,7 +106,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-cyan-300 dark:text-cyan-300 text-xl sm:text-2xl hover:text-white transition-colors duration-300"
+            className="text-cyan-300 text-xl sm:text-2xl hover:text-white transition-colors duration-300"
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -117,13 +115,13 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-black/95 dark:bg-black/95 backdrop-blur-xl border-t border-cyan-500/30">
+        <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-cyan-500/30">
           <nav className="flex flex-col p-4 sm:p-6 space-y-4">
             {["home", "about", "skills", "projects", "contact"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-cyan-300 dark:text-cyan-300 hover:text-white dark:hover:text-white transition-colors duration-300 capitalize text-left text-base sm:text-lg font-mono"
+                className="text-cyan-300 hover:text-white transition-colors duration-300 capitalize text-left text-base sm:text-lg font-mono"
               >
                 {item}
               </button>
@@ -149,7 +147,7 @@ const Header = () => {
                 <a
                   key={index}
                   href={link}
-                  className={`text-gray-300 dark:text-gray-300 ${color} transition-colors duration-300`}
+                  className={`text-gray-300 ${color} transition-colors duration-300`}
                 >
                   <Icon size={20} />
                 </a>
