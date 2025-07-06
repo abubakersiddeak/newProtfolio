@@ -44,7 +44,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen  flex items-center justify-center relative overflow-hidden"
     >
       {/* Futuristic Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br bg-black/75">
@@ -63,23 +63,23 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative mt-3 z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <div className="relative mt-0 z-10 px-2 sm:px-6 max-w-7xl mx-auto w-full">
+        <div className="grid  lg:grid-cols-2 gap-14 lg:gap-16 items-center ">
           {/* Text Content */}
-          <div className="text-center lg:text-left animate-fade-in-up order-2 lg:order-1">
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-4 sm:mb-6 leading-tight font-mono">
+          <div className="text-center  lg:text-left animate-fade-in-up order-2 lg:order-1">
+            <h1 className="text-xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-1 sm:mb-6 leading-tight font-mono">
               ABU_BAKAR SDDIK ZISAN
             </h1>
-            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
+            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-2 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
               <span className="text-cyan-400">&gt; </span>
               <span className="text-gray-300 ">{displayText}</span>
               <span className="animate-pulse text-cyan-400">█</span>
             </div>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-3 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
               Crafting immersive, visually stunning, and high-performance web
               experiences.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-6 sm:px-0">
               <button
                 onClick={() =>
                   document
@@ -107,7 +107,7 @@ const Hero = () => {
           {/* Futuristic Photo Frame */}
           <div className="flex justify-center lg:justify-end animate-fade-in-up order-1 lg:order-2">
             <div className="relative">
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
+              <div className="relative w-50 h-50 sm:w-80 sm:h-80 md:w-96 md:h-96">
                 {/* Holographic outer ring */}
                 <div
                   className="absolute -inset-8 border-2 border-cyan-400/30 rounded-full animate-spin"
@@ -168,7 +168,7 @@ const Hero = () => {
       {/* Futuristic Scroll Indicator */}
       <button
         onClick={scrollToNext}
-        className="cursor-pointer mt-2 absolute bottom-1 sm:bottom-5 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
+        className="cursor-pointer mt-2 absolute bottom-0 sm:bottom-5 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
       >
         <div className="flex flex-col items-center">
           <div className="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">
