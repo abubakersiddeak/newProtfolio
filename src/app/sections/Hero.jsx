@@ -168,15 +168,15 @@ const Hero = () => {
       {/* Futuristic Scroll Indicator */}
       <button
         onClick={scrollToNext}
-        className="cursor-pointer absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
+        className="cursor-pointer mt-2 absolute bottom-1 sm:bottom-5 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
       >
         <div className="flex flex-col items-center">
           <div className="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-cyan-400 rounded-full mt-2 animate-pulse"></div>
+            <div className="w-1 h-3 bg-cyan-400 rounded-full mt- animate-pulse"></div>
           </div>
           <FaChevronDown
             className="mt-2 group-hover:text-purple-400 transition-colors duration-300"
-            size={16}
+            size={12}
           />
         </div>
       </button>
