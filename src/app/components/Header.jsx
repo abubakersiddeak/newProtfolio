@@ -7,7 +7,7 @@ import {
   FaLinkedin,
   FaFacebook,
 } from "react-icons/fa";
-// import ThemeButton from "./ThemeButton";
+// import ThemeButton from "./ThemeButton"; // Uncomment if you use this
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Close menu after navigation
   };
 
   return (
@@ -37,60 +37,75 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      {/* Futuristic glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 opacity-50"></div>
+      {/* Futuristic glow effect - Adjusted for subtlety */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 opacity-70"></div>
 
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center relative z-10">
-        <div className="text-xl sm:text-2xl font-extrabold text-cyan-400">
+        {/* Logo */}
+        <div
+          className="text-xl sm:text-2xl font-extrabold text-cyan-400 cursor-pointer flex-shrink-0" /* flex-shrink-0 to prevent shrinking */
+          onClick={() => scrollToSection("home")} // Make logo clickable to scroll to home
+          aria-label="Scroll to top"
+        >
           <span className="text-cyan-400 font-mono">&lt;</span>
           DevZisan
           <span className=" font-mono">/&gt;</span>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex space-x-8 xl:space-x-12 ">
-          {["home", "about", "skills", "projects", "contact"].map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollToSection(item)}
-              className="relative text-cyan-300 hover:text-white transition-all duration-300 capitalize text-sm xl:text-base font-mono group cursor-pointer"
-            >
-              <span className="relative z-10">{item}</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-sm"></div>
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-300"></div>
-            </button>
-          ))}
+        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2">
+          {" "}
+          {/* POSITIONING FOR PERFECT CENTER */}
+          <ul className="flex space-x-8 xl:space-x-12">
+            {["home", "about", "skills", "projects", "contact"].map((item) => (
+              <li key={item}>
+                <button
+                  onClick={() => scrollToSection(item)}
+                  className="relative text-cyan-300 hover:text-white transition-all duration-300 capitalize text-sm xl:text-base font-mono group cursor-pointer"
+                >
+                  <span className="relative z-10">{item}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xs"></div>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-300"></div>
+                </button>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-4">
-          {/* Theme Toggle */}
-
+        {/* Desktop Actions (Social Links) */}
+        <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
+          {" "}
+          {/* flex-shrink-0 to prevent shrinking */}
+          {/* Theme Toggle - Uncomment if ThemeButton is used */}
           {/* <ThemeButton /> */}
-
-          {/* Social Links */}
-          <div className="flex space-x-3 cursor-pointer">
+          <div className="flex space-x-3">
             {[
               {
                 icon: FaGithub,
                 link: "https://github.com/abubakersiddeak",
                 color: "hover:text-cyan-400",
+                label: "GitHub profile",
               },
               {
                 icon: FaLinkedin,
                 link: "https://www.linkedin.com/in/abubaker-siddik-zisan/",
                 color: "hover:text-purple-400",
+                label: "LinkedIn profile",
               },
               {
                 icon: FaFacebook,
                 link: "https://www.facebook.com/abubakar.siddeak",
                 color: "hover:text-blue-500",
+                label: "Facebook profile",
               },
-            ].map(({ icon: Icon, color, link }, index) => (
+            ].map(({ icon: Icon, color, link, label }) => (
               <a
-                key={index}
+                key={link}
                 href={link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`text-gray-300 ${color} transition-all duration-300 transform hover:scale-110 hover:rotate-12`}
+                aria-label={label}
               >
                 <Icon size={18} />
               </a>
@@ -100,13 +115,14 @@ const Header = () => {
 
         {/* Mobile Actions */}
         <div className="flex lg:hidden items-center space-x-3">
-          {/* Mobile Theme Toggle */}
+          {/* Mobile Theme Toggle - Uncomment if ThemeButton is used */}
           {/* <ThemeButton /> */}
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-cyan-300 text-xl sm:text-2xl hover:text-white transition-colors duration-300"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -115,13 +131,13 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-cyan-500/30">
+        <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-cyan-500/30 animate-fade-in-down">
           <nav className="flex flex-col p-4 sm:p-6 space-y-4">
             {["home", "about", "skills", "projects", "contact"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-cyan-300 hover:text-white transition-colors duration-300 capitalize text-left text-base sm:text-lg font-mono"
+                className="text-cyan-300 hover:text-white transition-colors duration-300 capitalize text-left text-base sm:text-lg font-mono py-2"
               >
                 {item}
               </button>
@@ -132,22 +148,28 @@ const Header = () => {
                   icon: FaGithub,
                   link: "https://github.com/abubakersiddeak",
                   color: "hover:text-cyan-400",
+                  label: "GitHub profile",
                 },
                 {
                   icon: FaLinkedin,
                   link: "https://www.linkedin.com/in/abubaker-siddik-zisan/",
                   color: "hover:text-purple-400",
+                  label: "LinkedIn profile",
                 },
                 {
                   icon: FaFacebook,
                   link: "https://www.facebook.com/abubakar.siddeak",
                   color: "hover:text-blue-500",
+                  label: "Facebook profile",
                 },
-              ].map(({ icon: Icon, color, link }, index) => (
+              ].map(({ icon: Icon, color, link, label }) => (
                 <a
-                  key={index}
+                  key={link}
                   href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`text-gray-300 ${color} transition-colors duration-300`}
+                  aria-label={label}
                 >
                   <Icon size={20} />
                 </a>

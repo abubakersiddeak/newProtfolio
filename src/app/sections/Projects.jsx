@@ -1,14 +1,30 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnimatedSection from "../components/AnimatedSection";
 import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
-import { projects } from "../db/projects";
+import Image from "next/image";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const categories = ["All", "Full Stack", "Frontend", "Mobile"];
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const res = await fetch(`api/project`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
+        const data = await res.json();
+        setProjects(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProject();
+  }, []);
 
   const filteredProjects =
     selectedCategory === "All"
@@ -52,13 +68,15 @@ const Projects = () => {
         {/* Projects Grid - Responsive */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
-            <AnimatedSection key={project.id} delay={index * 100}>
+            <AnimatedSection key={project._id} delay={index * 100}>
               <div className="bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed  overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer  border-indigo-500/20 shadow-lg">
                 <div className="relative group">
-                  <img
-                    src={project.image}
+                  <Image
+                    src={project.image[0].url}
                     alt={project.title}
                     className="w-full h-40 sm:h-48 object-cover"
+                    width={600}
+                    height={300}
                   />
                   <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <button
@@ -118,10 +136,12 @@ const Projects = () => {
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-indigo-500/20">
               <div className="relative">
-                <img
-                  src={selectedProject.image}
+                <Image
+                  src={selectedProject.image[0].url}
                   alt={selectedProject.title}
                   className="w-full h-48 sm:h-64 object-cover"
+                  width={600}
+                  height={300}
                 />
                 <button
                   onClick={() => setSelectedProject(null)}

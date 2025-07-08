@@ -2,15 +2,7 @@
 import { useState, useMemo } from "react";
 import AnimatedSection from "../components/AnimatedSection";
 import { VscVscode } from "react-icons/vsc";
-import {
-  FaReact,
-  FaNodeJs,
-  FaPython,
-  FaGitAlt,
-  FaFigma,
-  FaWindows,
-  FaUbuntu,
-} from "react-icons/fa";
+import { FaReact, FaNodeJs, FaPython, FaGitAlt, FaFigma } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiTailwindcss,
@@ -19,7 +11,6 @@ import {
   SiNpm,
   SiExpress,
   SiAuth0,
-  SiKalilinux,
   SiGimp,
   SiInkscape, // Import Inkscape
 } from "react-icons/si";
@@ -81,21 +72,6 @@ const Skills = () => {
           icon: (
             <SiInkscape className="text-indigo-300" />
           ) /* Adjusted color and name */,
-        },
-      ],
-      "Operating Systems": [
-        // More descriptive tab name
-        {
-          name: "Ubuntu",
-          icon: <FaUbuntu className="text-orange-300" /> /* Adjusted color */,
-        },
-        {
-          name: "Kali Linux",
-          icon: <SiKalilinux className="text-blue-300" /> /* Adjusted color */,
-        },
-        {
-          name: "Windows",
-          icon: <FaWindows className="text-cyan-300" /> /* Adjusted color */,
         },
       ],
     }),
