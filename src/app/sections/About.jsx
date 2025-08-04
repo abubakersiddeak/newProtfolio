@@ -21,7 +21,7 @@ const About = () => {
             <div className="relative flex justify-center">
               {/* Professional photo - Responsive Square */}
               <div className="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto relative">
-                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-indigo-400 to-purple-600 rounded-2xl sm:rounded-3xl animate-pulse transform rotate-2 sm:rotate-3"></div>
+                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r bg-cyan-500 rounded-2xl sm:rounded-3xl animate-pulse transform rotate-2 sm:rotate-3"></div>
                 <div className="absolute inset-0 bg-slate-800 rounded-2xl sm:rounded-3xl transform -rotate-1 sm:-rotate-2 shadow-2xl">
                   <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-indigo-500/20">
                     <img

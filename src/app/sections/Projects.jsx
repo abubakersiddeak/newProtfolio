@@ -53,7 +53,7 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
+                className={`cursor-pointer px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === category
                     ? " text-white shadow-lg bg-cyan-600"
                     : " bg-slate-800 text-gray-300 hover:bg-slate-700 border border-indigo-500/20 shadow-lg"
@@ -81,7 +81,7 @@ const Projects = () => {
                   <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="opacity-0 group-hover:opacity-100 bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
+                      className="cursor-pointer opacity-0 group-hover:opacity-100 bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
                     >
                       View Details
                     </button>

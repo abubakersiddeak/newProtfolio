@@ -86,9 +86,10 @@ const Hero = () => {
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="cursor-pointer relative bg-gradient-to-r bg-blue-700 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-sm sm:text-base font-mono overflow-hidden group"
+                className="group cursor-pointer relative bg-gradient-to-r bg-cyan-400  px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-sm sm:text-base font-mono overflow-hidden group"
               >
-                <span className="relative z-10">View Projects</span>
+                <div className="absolute bg-amber-50 h-full w-full left-5 top-0 z-10 group-hover:translate-x-[100%] duration-750"></div>
+                <span className="relative z-10 text-black">View Projects</span>
               </button>
               <button
                 onClick={() =>
@@ -146,7 +147,7 @@ const Hero = () => {
                   </div>
 
                   {/* Photo container */}
-                  <div className="absolute inset-3 rounded-xl overflow-hidden border border-cyan-400/30">
+                  <div className="absolute inset-3 overflow-hidden border border-cyan-400/30">
                     <img
                       src="./protimg.png"
                       alt="Image loading...."
