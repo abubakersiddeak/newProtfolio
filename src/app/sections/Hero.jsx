@@ -68,7 +68,7 @@ const Hero = () => {
           {/* Text Content */}
           <div className="text-center  lg:text-left animate-fade-in-up order-2 lg:order-1">
             <h1 className="text-xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-1 sm:mb-6 leading-tight font-mono">
-              ABU_BAKAR SDDIK ZISAN
+              ABU_BAKAR SIDDIK ZISAN
             </h1>
             <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-2 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
               <span className="text-cyan-400">&gt; </span>
