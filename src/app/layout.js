@@ -1,4 +1,5 @@
 import "./globals.css";
+import AuthSessionProvider from "./components/AuthSessionProvider";
 
 export const metadata = {
   title: "DevZisan | Web Developer",
@@ -49,7 +50,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthSessionProvider>{children}</AuthSessionProvider>
+      </body>
     </html>
   );
 }
