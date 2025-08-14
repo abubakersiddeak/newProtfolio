@@ -1,38 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import { FaChevronDown } from "react-icons/fa";
+import TypingTextEffect from "../components/TypingTextEffect";
+import Image from "next/image";
 
-const Hero = () => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
-
+const Hero = ({ user }) => {
   const texts = ["Web Developer", "UI/UX Designer"];
-
-  useEffect(() => {
-    if (isTyping) {
-      const currentText = texts[currentIndex];
-      if (displayText.length < currentText.length) {
-        const timeout = setTimeout(() => {
-          setDisplayText(currentText.slice(0, displayText.length + 1));
-        }, 100);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => setIsTyping(false), 2000);
-        return () => clearTimeout(timeout);
-      }
-    } else {
-      if (displayText.length > 0) {
-        const timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, 50);
-        return () => clearTimeout(timeout);
-      } else {
-        setCurrentIndex((prev) => (prev + 1) % texts.length);
-        setIsTyping(true);
-      }
-    }
-  }, [displayText, currentIndex, isTyping, texts]);
+  console.log(user);
 
   const scrollToNext = () => {
     const aboutSection = document.getElementById("about");
@@ -68,11 +42,11 @@ const Hero = () => {
           {/* Text Content */}
           <div className="text-center  lg:text-left animate-fade-in-up order-2 lg:order-1">
             <h1 className="text-xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-1 sm:mb-6 leading-tight font-mono">
-              ABU_BAKAR SIDDIK ZISAN
+              {user.length !== 0 ? user[0].name?.toUpperCase() : "loading..."}
             </h1>
             <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-2 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
               <span className="text-cyan-400">&gt; </span>
-              <span className="text-gray-300 ">{displayText}</span>
+              <TypingTextEffect texts={texts} />
               <span className="animate-pulse text-cyan-400">█</span>
             </div>
             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-3 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
@@ -148,9 +122,15 @@ const Hero = () => {
 
                   {/* Photo container */}
                   <div className="absolute inset-3 overflow-hidden border border-cyan-400/30">
-                    <img
-                      src="./protimg.png"
-                      alt="Image loading...."
+                    <Image
+                      src={
+                        user.length !== 0
+                          ? user[0].mainImage
+                          : "/placeholder.svg"
+                      }
+                      alt="Image loading..."
+                      width={500}
+                      height={500}
                       className="w-full h-full object-cover"
                     />
                   </div>

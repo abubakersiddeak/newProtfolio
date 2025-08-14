@@ -1,7 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import AnimatedSection from "../components/AnimatedSection";
-import { FaGithub, FaExternalLinkAlt, FaTimes } from "react-icons/fa";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaTimes,
+  FaExpand,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import Image from "next/image";
 
 const Projects = () => {
@@ -10,6 +17,7 @@ const Projects = () => {
   const categories = ["All", "Full Stack", "Frontend", "Mobile"];
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [projects, setProjects] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   useEffect(() => {
     const fetchProject = async () => {
       try {
@@ -65,64 +73,89 @@ const Projects = () => {
           </div>
         </AnimatedSection>
 
-        {/* Projects Grid - Responsive */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        {/* Futuristic Project Modal */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
             <AnimatedSection key={project._id} delay={index * 100}>
-              <div className="bg-black/50 p-5 sm:p-6 rounded-xl border border-dashed  overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer  border-indigo-500/20 shadow-lg">
-                <div className="relative group">
+              {/* Futuristic Card Container */}
+              <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/90 rounded-xl border border-cyan-400/20 hover:border-cyan-400/40 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-1 group/card h-full flex flex-col">
+                {/* Holographic Effect */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
+                  <div className="absolute -inset-8 bg-[conic-gradient(from_90deg_at_50%_50%,#00ccff_0%,#7b00ff_50%,#00ccff_100%)] opacity-20 group-hover/card:opacity-30 animate-spin-slow"></div>
+                </div>
+
+                {/* Image Container with Full Screen Trigger */}
+                <div
+                  className="relative overflow-hidden rounded-t-xl cursor-zoom-in"
+                  onClick={() => setSelectedProject(project)}
+                >
                   <Image
                     src={project.image[0].url}
                     alt={project.title}
-                    className="w-full h-40 sm:h-48 object-cover"
                     width={600}
                     height={300}
+                    className="w-full h-48 sm:h-56 object-cover transition-transform duration-500 group-hover/card:scale-110"
                   />
-                  <div className="absolute inset-0  bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="cursor-pointer opacity-0 group-hover:opacity-100 bg-indigo-600 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 text-sm sm:text-base"
-                    >
-                      View Details
-                    </button>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-6">
-                  <div className="flex justify-between items-start mb-3 sm:mb-4">
-                    <h3 className="text-lg sm:text-xl font-bold text-white">
-                      {project.title}
-                    </h3>
-                    <span className="text-xs bg-indigo-600 text-white px-2 py-1 rounded">
-                      {project.category}
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <span className="text-white font-medium translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
+                      Click to expand
                     </span>
                   </div>
-                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
+
+                  {/* Floating Tech Badge */}
+                  <span className="absolute top-3 right-3 bg-gray-900/90 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono border border-cyan-400/30 backdrop-blur-sm">
+                    {project.category}
+                  </span>
+                </div>
+
+                {/* Card Content */}
+                <div className="p-5 flex-1 flex flex-col">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover/card:text-cyan-400 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-300 mb-4 text-sm line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                    {project.technologies.map((tech) => (
+
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+                    {project.technologies.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs bg-slate-700 text-gray-300 px-2 sm:px-3 py-1 rounded-lg border border-indigo-500/20"
+                        className="text-xs font-mono bg-gray-800/80 text-cyan-300 px-2.5 py-1 rounded-full border border-gray-700 hover:border-cyan-400/50 transition-colors"
                       >
                         {tech}
                       </span>
                     ))}
+                    {project.technologies.length > 4 && (
+                      <span className="text-xs font-mono bg-gray-800/80 text-gray-400 px-2.5 py-1 rounded-full">
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
                   </div>
-                  <div className="flex justify-between">
+
+                  {/* Action Buttons */}
+                  <div className="flex justify-between border-t border-gray-800 pt-4">
                     <a
                       href={project.github}
-                      className="flex items-center text-gray-300 hover:text-indigo-400 transition-colors text-sm sm:text-base"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm flex items-center text-gray-400 hover:text-cyan-400 transition-colors"
                     >
-                      <FaGithub className="mr-1 sm:mr-2" />
+                      <FaGithub className="mr-2" />
                       Code
                     </a>
                     <a
                       href={project.live}
-                      className="flex items-center text-gray-300 hover:text-indigo-400 transition-colors text-sm sm:text-base"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm flex items-center text-gray-400 hover:text-purple-400 transition-colors"
                     >
-                      <FaExternalLinkAlt className="mr-1 sm:mr-2" />
-                      Live Demo
+                      <FaExternalLinkAlt className="mr-2" />
+                      Live
                     </a>
                   </div>
                 </div>
@@ -131,62 +164,135 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Project Modal - Responsive */}
+        {/* Full Screen Image Viewer */}
         {selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-indigo-500/20">
-              <div className="relative">
-                <Image
-                  src={selectedProject.image[0].url}
-                  alt={selectedProject.title}
-                  className="w-full h-48 sm:h-64 object-cover"
-                  width={600}
-                  height={300}
-                />
+          <div className="fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-end sm:justify-center p-4 backdrop-blur-lg overflow-y-auto">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="cursor-pointer absolute top-6 right-6 z-50 p-3 rounded-full bg-gray-900/80 hover:bg-gray-800 text-white transition-all shadow-lg border border-gray-700 hover:border-cyan-400"
+            >
+              <FaTimes className="text-xl" />
+            </button>
+
+            {/* Main Content Container */}
+            <div className="w-full max-w-6xl flex flex-col  h-[90vh]">
+              {/* Project Details Panel - Bottom Section */}
+
+              {/* Image Carousel - Top Section */}
+              <div className="relative w-full h-[60vh] min-h-[400px] bg-black rounded-t-xl sm:rounded-b-none overflow-hidden border border-gray-700">
+                {selectedProject.image.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute inset-0 flex items-center justify-center transition-opacity duration-500"
+                    style={{ opacity: currentImageIndex === idx ? 1 : 0 }}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={`${selectedProject.title} - ${idx + 1}`}
+                      fill
+                      className="object-contain"
+                      quality={100}
+                    />
+                  </div>
+                ))}
+
+                {/* Navigation Arrows */}
                 <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-2 sm:top-4 right-2 sm:right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70 transition-all"
+                  onClick={() =>
+                    setCurrentImageIndex((prev) =>
+                      prev > 0 ? prev - 1 : selectedProject.image.length - 1
+                    )
+                  }
+                  className="absolute cursor-pointer left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-gray-900/80 hover:bg-gray-800 text-white transition-all shadow-lg border border-gray-700 hover:border-cyan-400"
                 >
-                  <FaTimes />
+                  <FaChevronLeft className="text-xl" />
                 </button>
-              </div>
-              <div className="p-4 sm:p-6 md:p-8">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                    {selectedProject.title}
-                  </h3>
-                  <span className="bg-indigo-600 text-white px-3 py-1 rounded text-sm self-start">
-                    {selectedProject.category}
-                  </span>
-                </div>
-                <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-lg leading-relaxed">
-                  {selectedProject.longDescription}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                  {selectedProject.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-slate-700 text-gray-300 px-3 sm:px-4 py-1 sm:py-2 rounded-lg border border-indigo-500/20 text-sm"
-                    >
-                      {tech}
-                    </span>
+                <button
+                  onClick={() =>
+                    setCurrentImageIndex((prev) =>
+                      prev < selectedProject.image.length - 1 ? prev + 1 : 0
+                    )
+                  }
+                  className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-gray-900/80 hover:bg-gray-800 text-white transition-all shadow-lg border border-gray-700 hover:border-cyan-400"
+                >
+                  <FaChevronRight className="text-xl" />
+                </button>
+
+                {/* Image Indicators */}
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+                  {selectedProject.image.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      className={`w-3 h-3 cursor-pointer rounded-full transition-all ${
+                        currentImageIndex === idx
+                          ? "bg-cyan-400 scale-125"
+                          : "bg-gray-600 hover:bg-gray-400"
+                      }`}
+                    />
                   ))}
                 </div>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <a
-                    href={selectedProject.github}
-                    className="flex items-center justify-center bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg :hover:bg-slate-600 transition-colors border border-indigo-500/20 text-sm sm:text-base"
-                  >
-                    <FaGithub className="mr-2" />
-                    View Code
-                  </a>
-                  <a
-                    href={selectedProject.live}
-                    className="flex items-center justify-center bg-indigo-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base"
-                  >
-                    <FaExternalLinkAlt className="mr-2" />
-                    Live Demo
-                  </a>
+              </div>
+              <div className="bg-gradient-to-b from-gray-900 to-gray-800 rounded-b-xl sm:rounded-t-none sm:rounded-b-xl p-6 border-t border-gray-700 shadow-lg">
+                <div className="flex flex-col md:flex-row gap-6">
+                  {/* Text Content */}
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-white mb-2">
+                      {selectedProject.title}
+                    </h2>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-xs px-3 py-1 rounded-full bg-cyan-900/30 text-cyan-400">
+                        {selectedProject.category}
+                      </span>
+                      <span className="text-gray-400 text-sm">
+                        {currentImageIndex + 1}/{selectedProject.image.length}
+                      </span>
+                    </div>
+                    <p className="text-gray-300 mb-4">
+                      {selectedProject.longDescription ||
+                        selectedProject.description}
+                    </p>
+
+                    {/* Tech Stack */}
+                    <div className="mb-6">
+                      <h3 className="text-sm font-semibold text-gray-400 mb-2">
+                        TECH STACK
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-xs px-3 py-1 rounded-full bg-gray-800 text-cyan-300 border border-gray-700"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col gap-3 min-w-[200px]">
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors border border-gray-700"
+                    >
+                      <FaGithub />
+                      <span>View Code</span>
+                    </a>
+                    <a
+                      href={selectedProject.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white rounded-lg transition-colors"
+                    >
+                      <FaExternalLinkAlt />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

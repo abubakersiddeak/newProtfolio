@@ -1,6 +1,7 @@
+import Image from "next/image";
 import AnimatedSection from "../components/AnimatedSection";
 
-const About = () => {
+const About = ({ user }) => {
   return (
     <section
       id="about"
@@ -24,9 +25,15 @@ const About = () => {
                 <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r bg-cyan-500 rounded-2xl sm:rounded-3xl animate-pulse transform rotate-2 sm:rotate-3"></div>
                 <div className="absolute inset-0 bg-slate-800 rounded-2xl sm:rounded-3xl transform -rotate-1 sm:-rotate-2 shadow-2xl">
                   <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-indigo-500/20">
-                    <img
-                      src="./mepo1.jpg"
-                      alt="John Doe - Professional Photo"
+                    <Image
+                      src={
+                        user.length !== 0
+                          ? user[0].aboutImage
+                          : "/placeholder.svg"
+                      }
+                      alt="Image loading..."
+                      width={500}
+                      height={500}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -40,7 +47,7 @@ const About = () => {
           <AnimatedSection delay={400}>
             <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
-                ABU BAKAR SIDDIK ZISAN
+                {user.length !== 0 ? user[0].name?.toUpperCase() : "loading..."}
               </h3>
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 A passionate Wev Developer who crafts dynamic and interactive

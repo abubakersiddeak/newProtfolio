@@ -1,2 +1,28 @@
 @import "tailwindcss";
 /* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.group-hover .group-hover\:animate-float {
+  animation: float 3s ease-in-out infinite;
+}

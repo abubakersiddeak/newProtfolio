@@ -21,6 +21,7 @@ import SkillsDisplay from "./components/SkillsDisplay";
 import ProjectsDisplay from "./components/ProjectsDisplay";
 import ManageSkills from "./components/ManageSkils";
 import ManageProjects from "./components/ManageProjects";
+import ManageUser from "./components/ManageUser";
 const generateUniqueId = () => crypto.randomUUID();
 
 const initialSkills = [
@@ -172,6 +173,7 @@ export default function Page() {
           {activeSection === "manage-projects" && (
             <ManageProjects projects={projects} setProjects={setProjects} />
           )}
+          {activeSection === "manage-users" && <ManageUser />}
         </main>
       </div>
     </div>

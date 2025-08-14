@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 // import ThemeButton from "./ThemeButton"; // Uncomment if you use this
 
-const Header = () => {
+const Header = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -79,37 +79,46 @@ const Header = () => {
           {/* Theme Toggle - Uncomment if ThemeButton is used */}
           {/* <ThemeButton /> */}
           <div className="flex space-x-3">
-            {[
-              {
-                icon: FaGithub,
-                link: "https://github.com/abubakersiddeak",
-                color: "hover:text-cyan-400",
-                label: "GitHub profile",
-              },
-              {
-                icon: FaLinkedin,
-                link: "https://www.linkedin.com/in/abubaker-siddik-zisan/",
-                color: "hover:text-purple-400",
-                label: "LinkedIn profile",
-              },
-              {
-                icon: FaFacebook,
-                link: "https://www.facebook.com/abubakar.siddeak",
-                color: "hover:text-blue-500",
-                label: "Facebook profile",
-              },
-            ].map(({ icon: Icon, color, link, label }) => (
-              <a
-                key={link}
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-gray-300 ${color} transition-all duration-300 transform hover:scale-110 hover:rotate-12`}
-                aria-label={label}
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+            {user.length !== 0
+              ? [
+                  {
+                    icon: FaGithub,
+                    link: [user[0].socialLinks.github],
+                    color: "hover:text-cyan-400",
+                    label: "GitHub profile",
+                  },
+                  {
+                    icon: FaLinkedin,
+                    link: [user[0].socialLinks.linkedin],
+                    color: "hover:text-purple-400",
+                    label: "LinkedIn profile",
+                  },
+                  {
+                    icon: FaFacebook,
+                    link: [user[0].socialLinks.facebook],
+                    color: "hover:text-blue-500",
+                    label: "Facebook profile",
+                  },
+                ].map(({ icon: Icon, color, link, label }) => (
+                  <a
+                    key={link}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-300 ${color} transition-all duration-300 transform hover:scale-110 hover:rotate-12`}
+                    aria-label={label}
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))
+              : Array(3)
+                  .fill("")
+                  .map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="w-6 h-6 rounded-full bg-gray-700 animate-pulse"
+                    />
+                  ))}
           </div>
         </div>
 
@@ -143,37 +152,46 @@ const Header = () => {
               </button>
             ))}
             <div className="flex space-x-4 pt-4 border-t border-cyan-500/30">
-              {[
-                {
-                  icon: FaGithub,
-                  link: "https://github.com/abubakersiddeak",
-                  color: "hover:text-cyan-400",
-                  label: "GitHub profile",
-                },
-                {
-                  icon: FaLinkedin,
-                  link: "https://www.linkedin.com/in/abubaker-siddik-zisan/",
-                  color: "hover:text-purple-400",
-                  label: "LinkedIn profile",
-                },
-                {
-                  icon: FaFacebook,
-                  link: "https://www.facebook.com/abubakar.siddeak",
-                  color: "hover:text-blue-500",
-                  label: "Facebook profile",
-                },
-              ].map(({ icon: Icon, color, link, label }) => (
-                <a
-                  key={link}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-gray-300 ${color} transition-colors duration-300`}
-                  aria-label={label}
-                >
-                  <Icon size={20} />
-                </a>
-              ))}
+              {user.length !== 0
+                ? [
+                    {
+                      icon: FaGithub,
+                      link: [user[0].socialLinks.github],
+                      color: "hover:text-cyan-400",
+                      label: "GitHub profile",
+                    },
+                    {
+                      icon: FaLinkedin,
+                      link: [user[0].socialLinks.linkedin],
+                      color: "hover:text-purple-400",
+                      label: "LinkedIn profile",
+                    },
+                    {
+                      icon: FaFacebook,
+                      link: [user[0].socialLinks.facebook],
+                      color: "hover:text-blue-500",
+                      label: "Facebook profile",
+                    },
+                  ].map(({ icon: Icon, color, link, label }) => (
+                    <a
+                      key={link}
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-gray-300 ${color} transition-colors duration-300`}
+                      aria-label={label}
+                    >
+                      <Icon size={20} />
+                    </a>
+                  ))
+                : Array(3)
+                    .fill("")
+                    .map((_, idx) => (
+                      <div
+                        key={idx}
+                        className="w-6 h-6 rounded-full bg-gray-700 animate-pulse"
+                      />
+                    ))}
             </div>
           </nav>
         </div>

@@ -42,6 +42,14 @@ export default function SideNavbar({ setActiveSection }) {
             <FaProjectDiagram className="mr-3 text-xl" /> Manage Projects
           </button>
         </li>
+        <li>
+          <button
+            onClick={() => setActiveSection("manage-users")}
+            className="flex items-center w-full py-2 px-4 rounded-md hover:bg-gray-700 transition-colors cursor-pointer hover:scale-95 duration-750"
+          >
+            <FaTools className="mr-3 text-xl" /> Manage Users
+          </button>
+        </li>
       </ul>
       <button
         onClick={() => signOut({ callbackUrl: "/sign-in" })}

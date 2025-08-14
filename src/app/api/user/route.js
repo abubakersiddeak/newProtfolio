@@ -72,3 +72,23 @@ export async function POST(req) {
     );
   }
 }
+export async function GET(req) {
+  try {
+    await connectMongodb();
+    const users = await User.find();
+
+    // If no users are found, you might want to return an empty array and a 200 status
+    if (!users || users.length === 0) {
+      return NextResponse.json({ message: "No users found" }, { status: 200 });
+    }
+
+    return NextResponse.json(users, { status: 200 });
+  } catch (error) {
+    console.error("Failed to fetch users:", error); // console.log এর পরিবর্তে console.error ব্যবহার করা ভালো
+    // On error, return a 500 status code with an error message
+    return NextResponse.json(
+      { message: "Failed to fetch users", error: error.message },
+      { status: 500 }
+    );
+  }
+}
