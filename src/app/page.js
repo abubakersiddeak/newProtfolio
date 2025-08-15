@@ -1,6 +1,7 @@
 "use client";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import LoadingVideo from "./loading";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Hero from "./sections/Hero";
@@ -10,6 +11,8 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [user, setUser] = useState([]);
+  const [showVideo, setShowVideo] = useState(true);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -23,15 +26,25 @@ export default function Home() {
     };
     fetchUsers();
   }, []);
+
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+  };
   return (
-    <div className=" bg-slate-900 transition-colors duration-300">
-      <Header user={user} />
-      <Hero user={user} />
-      <About user={user} />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      {showVideo ? (
+        <LoadingVideo onVideoEnd={handleVideoEnd} />
+      ) : (
+        <div className=" bg-slate-900 transition-colors duration-300">
+          <Header user={user} />
+          <Hero user={user} />
+          <About user={user} />
+          <Skills />
+          <Projects />
+          <Contact />
+          <Footer />
+        </div>
+      )}
+    </>
   );
 }

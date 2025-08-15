@@ -74,19 +74,21 @@ const Projects = () => {
         </AnimatedSection>
 
         {/* Futuristic Project Modal */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-4">
           {filteredProjects.map((project, index) => (
             <AnimatedSection key={project._id} delay={index * 100}>
               {/* Futuristic Card Container */}
-              <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/90 rounded-xl border border-cyan-400/20 hover:border-cyan-400/40 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-1 group/card h-full flex flex-col">
+              <div
+                className={`bg-gradient-to-br from-gray-900/80 to-gray-800/90 rounded-xl border border-cyan-400/20 hover:border-cyan-400/40 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-1 group/card h-[350px] w-[85vw] md:h-[400px] xl:h-[450px] md:w-[25vw] xl:w-[25vw] 2xl:w-[25vw] flex flex-col  relative`}
+              >
                 {/* Holographic Effect */}
-                <div className="absolute inset-0 rounded-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden ">
                   <div className="absolute -inset-8 bg-[conic-gradient(from_90deg_at_50%_50%,#00ccff_0%,#7b00ff_50%,#00ccff_100%)] opacity-20 group-hover/card:opacity-30 animate-spin-slow"></div>
                 </div>
 
                 {/* Image Container with Full Screen Trigger */}
                 <div
-                  className="relative overflow-hidden rounded-t-xl cursor-zoom-in"
+                  className="relative  rounded-t-xl cursor-zoom-in overflow-hidden"
                   onClick={() => setSelectedProject(project)}
                 >
                   <Image
@@ -111,21 +113,21 @@ const Projects = () => {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover/card:text-cyan-400 transition-colors duration-300">
+                <div className="p-5 flex-1 flex flex-col h-[60%] xl:h-[55%]">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover/card:text-cyan-400 transition-colors duration-300">
                     {project.title}
                   </h3>
 
-                  <p className="text-gray-300 mb-4 text-sm line-clamp-3">
+                  <p className="text-gray-300 mb-4 text-xs line-clamp-3">
                     {project.description}
                   </p>
 
                   {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+                  <div className="hidden flex-wrap gap-2 mb-4 mt-auto md:flex">
                     {project.technologies.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs font-mono bg-gray-800/80 text-cyan-300 px-2.5 py-1 rounded-full border border-gray-700 hover:border-cyan-400/50 transition-colors"
+                        className="text-[7px] md:text-[10px] font-mono bg-gray-800/80 text-cyan-300 px-2.5 py-1 rounded-full border border-gray-700 hover:border-cyan-400/50 transition-colors"
                       >
                         {tech}
                       </span>
