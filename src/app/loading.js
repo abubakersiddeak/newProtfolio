@@ -15,8 +15,8 @@ export default function LoadingVideo({ onVideoEnd }) {
 
   // Mobile এবং Desktop ভিডিও আলাদা
   const videoSrc = isMobile
-    ? "https://res.cloudinary.com/dmb58pab9/video/upload/v1755251728/Purple_Cute_Aninated_Welcome_to_My_Channel_Mobile_Video_1_fm4wp2.mp4"
-    : "https://res.cloudinary.com/dmb58pab9/video/upload/v1755251556/Beige_and_Brown_Neutral_Elegant_Welcome_YouTube_Intro_Video_4_omc0a0.mp4";
+    ? "https://res.cloudinary.com/dmb58pab9/video/upload/v1755263640/Purple_Cute_Aninated_Welcome_to_My_Channel_Mobile_Video_2_xbftau.mp4"
+    : "https://res.cloudinary.com/dmb58pab9/video/upload/v1755263613/Beige_and_Brown_Neutral_Elegant_Welcome_YouTube_Intro_Video_1_ofhkqk.mp4";
 
   return (
     <div className="flex justify-center items-center h-screen bg-black">
