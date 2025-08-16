@@ -1,6 +1,4 @@
-// src/app/loading.js
 "use client";
-
 export default function Loading() {
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950/95 backdrop-blur-sm">
