@@ -1,12 +1,18 @@
 "use client";
 
-import { FaChevronDown } from "react-icons/fa";
 import TypingTextEffect from "../components/TypingTextEffect";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 const Hero = ({ user }) => {
-  const texts = ["Web Developer", "UI/UX Designer"];
-  console.log(user);
+  const texts = [
+    "Web Developer",
+    "UI/UX Designer",
+    "Digital Creator",
+    "Tech Enthusiast",
+  ];
+  const heroRef = useRef(null);
+  const particlesRef = useRef(null);
 
   const scrollToNext = () => {
     const aboutSection = document.getElementById("about");
@@ -18,42 +24,105 @@ const Hero = ({ user }) => {
   return (
     <section
       id="home"
-      className="min-h-screen  flex items-center justify-center relative overflow-hidden"
+      ref={heroRef}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans"
     >
-      {/* Futuristic Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br bg-black/75">
-        {/* Matrix-style grid */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-              linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px)
+      {/* Futuristic Grid Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
             `,
-              backgroundSize: "50px 50px",
-            }}
-          ></div>
-        </div>
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
       </div>
 
-      <div className="relative mt-0 z-10 px-2 sm:px-6 max-w-7xl mx-auto w-full">
-        <div className="grid  lg:grid-cols-2 gap-14 lg:gap-16 items-center ">
+      {/* Animated Binary Code Rain */}
+      <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-blue-400 text-xs font-mono whitespace-nowrap"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animation: `binaryRain ${
+                Math.random() * 10 + 5
+              }s linear infinite`,
+              animationDelay: `${Math.random() * 5}s`,
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+            }}
+          >
+            {Array(50)
+              .fill(0)
+              .map(() => Math.round(Math.random()))
+              .join(" ")}
+          </div>
+        ))}
+      </div>
+
+      {/* Floating Particles */}
+      <div
+        ref={particlesRef}
+        className="absolute inset-0 z-0 pointer-events-none"
+      />
+
+      {/* Glowing Grid Lines */}
+      <svg
+        className="absolute inset-0 w-full h-full z-0 opacity-20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            id="grid"
+            width="40"
+            height="40"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 40 0 L 0 0 0 40"
+              fill="none"
+              stroke="rgba(59, 130, 246, 0.3)"
+              strokeWidth="0.5"
+              className="animate-pulse"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-20">
+        <div className="grid lg:grid-cols-2 gap-5 md:gap-10 lg:gap-24 items-center">
           {/* Text Content */}
-          <div className="text-center  lg:text-left animate-fade-in-up order-2 lg:order-1">
-            <h1 className="text-xl md:text-3xl lg:text-5xl font-bold  bg-clip-text bg-gradient-to-r text-white mb-1 sm:mb-6 leading-tight font-mono">
-              {user.length !== 0 ? user[0].name?.toUpperCase() : "loading..."}
-            </h1>
-            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-2 sm:mb-8 h-8 sm:h-10 md:h-12 font-mono">
-              <span className="text-cyan-400">&gt; </span>
-              <TypingTextEffect texts={texts} />
-              <span className="animate-pulse text-cyan-400">█</span>
+          <div className="text-center lg:text-left order-2 lg:order-1 animate-fade-in-up">
+            <div className="relative inline-block mb-2 md:mb-4 lg:mb-6">
+              <h1 className="relative text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white leading-tight tracking-tight">
+                <span className="bg-clip-text  bg-gradient-to-r text-white">
+                  {user.length !== 0
+                    ? user[0].name?.toUpperCase()
+                    : "LOADING..."}
+                </span>
+              </h1>
             </div>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-3 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0 font-mono">
-              Crafting immersive, visually stunning, and high-performance web
-              experiences.
+
+            <div className="text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 md:mb-4 lg:mb-6 h-8 sm:h-10 font-mono">
+              <span className="text-blue-400">&gt; </span>
+              <TypingTextEffect texts={texts} />
+              <span className="animate-pulse-cursor text-blue-400">_</span>
+            </div>
+
+            <p className="hidden md:block text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              I craft <span className="">cutting-edge digital experiences</span>{" "}
+              at the intersection of design and technology. Specializing in{" "}
+              <span className="">immersive interfaces</span> and{" "}
+              <span className="">high-performance applications</span>.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-6 sm:px-0">
+
+            <div className="flex flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
               <button
                 onClick={() =>
                   document
@@ -65,6 +134,7 @@ const Hero = ({ user }) => {
                 <div className="absolute bg-amber-50 h-full w-full left-5 top-0 z-10 group-hover:translate-x-[100%] duration-750"></div>
                 <span className="relative z-10 text-black">View Projects</span>
               </button>
+
               <button
                 onClick={() =>
                   document
@@ -77,90 +147,162 @@ const Hero = ({ user }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </div>
+
+            {/* Tech Stack Indicators */}
+            <div className="mt-12 hidden md:flex flex-wrap justify-center lg:justify-start gap-3">
+              {["React", "framer-motion", "Next.js", "Node.js", "Mongodb"].map(
+                (tech) => (
+                  <div
+                    key={tech}
+                    className="px-3 py-1.5 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-800 text-xs font-mono text-gray-300 hover:text-blue-400 transition-colors"
+                  >
+                    {tech}
+                  </div>
+                )
+              )}
+            </div>
           </div>
 
-          {/* Futuristic Photo Frame */}
-          <div className="flex justify-center lg:justify-end animate-fade-in-up order-1 lg:order-2">
-            <div className="relative">
-              <div className="relative w-50 h-50 sm:w-80 sm:h-80 md:w-96 md:h-96">
-                {/* Holographic outer ring */}
-                <div
-                  className="absolute -inset-8 border-2 border-cyan-400/30 rounded-full animate-spin"
-                  style={{ animationDuration: "20s" }}
-                >
-                  <div className="absolute top-0 left-1/2 w-2 h-2 bg-cyan-400 rounded-full transform -translate-x-1/2 -translate-y-1"></div>
-                  <div className="absolute bottom-0 left-1/2 w-2 h-2 bg-purple-400 rounded-full transform -translate-x-1/2 translate-y-1"></div>
-                  <div className="absolute left-0 top-1/2 w-2 h-2 bg-pink-400 rounded-full transform -translate-x-1 -translate-y-1/2"></div>
-                  <div className="absolute right-0 top-1/2 w-2 h-2 bg-cyan-400 rounded-full transform translate-x-1 -translate-y-1/2"></div>
-                </div>
+          {/* Holographic Profile Interface */}
+          <div className="flex justify-center lg:justify-end order-1 lg:order-2 animate-fade-in-up ">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-110 md:h-110 2xl:w-130 2xl:h-130 rounded-xl overflow-hidden group  border-amber-100 border-b-4">
+              {/* Holographic Border */}
+              <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-blue-400/30 transition-all duration-500"></div>
 
-                {/* Middle ring */}
-                <div
-                  className="absolute -inset-4 border border-purple-400/50 rounded-full animate-spin"
-                  style={{
-                    animationDuration: "15s",
-                    animationDirection: "reverse",
-                  }}
-                >
-                  <div className="absolute top-2 right-2 w-1 h-1 bg-purple-400 rounded-full"></div>
-                  <div className="absolute bottom-2 left-2 w-1 h-1 bg-cyan-400 rounded-full"></div>
-                </div>
+              {/* Glowing Effect */}
+              <div className="absolute inset-0 bg-blue-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                {/* Glowing aura */}
-                {/* <div className="absolute -inset-6 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse"></div> */}
+              {/* Scan Lines */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px)] bg-[length:100% 3px] opacity-30"></div>
 
-                {/* Main frame */}
-                <div className="relative w-full h-full">
-                  {/* Hexagonal frame effect */}
-                  <div className="absolute inset-0  rounded-2xl backdrop-blur-sm border border-cyan-400/50 shadow-2xl shadow-cyan-500/25">
-                    {/* Corner tech details */}
-                    <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-cyan-400"></div>
-                    <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-purple-400"></div>
-                    <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-pink-400"></div>
-                    <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-cyan-400"></div>
-                  </div>
+              {/* Image Container */}
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={
+                    user.length !== 0 ? user[0].mainImage : "/placeholder.svg"
+                  }
+                  alt="Profile Image"
+                  layout="fill"
+                  objectFit="cover"
+                  className="w-full h-full transition-all duration-500 transform group-hover:scale-105"
+                />
 
-                  {/* Photo container */}
-                  <div className="absolute inset-3 overflow-hidden border border-cyan-400/30">
-                    <Image
-                      src={
-                        user.length !== 0
-                          ? user[0].mainImage
-                          : "/placeholder.svg"
-                      }
-                      alt="Image loading..."
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                {/* Status indicators */}
-                <div className="absolute -top-0 -right-0 bg-green-600  text-white px-3 py-1 rounded-sm rounded-tr-2xl text-xs font-mono font-extrabold shadow-lg ">
-                  Available For Work
-                </div>
+                {/* Holographic Overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(168,85,247,0.1) 100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
+
+              {/* Floating Elements */}
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-blue-500/10 blur-xl animate-float-slow"></div>
+              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-purple-500/10 blur-xl animate-float-slower"></div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Futuristic Scroll Indicator */}
+      {/* Cyberpunk-inspired Scroll Indicator */}
       <button
         onClick={scrollToNext}
-        className="cursor-pointer mt-2 absolute bottom-0 sm:bottom-5 left-1/2 transform -translate-x-1/2 text-cyan-400 animate-bounce group"
+        className="cursor-pointer absolute bottom-2 lg:bottom-4 left-1/2 transform -translate-x-1/2 text-gray-500 hover:text-blue-400 transition-colors duration-300 group"
       >
         <div className="flex flex-col items-center">
-          <div className="w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-cyan-400 rounded-full mt- animate-pulse"></div>
+          <div className="relative w-8 h-12 border-2 border-gray-700 rounded-full group-hover:border-blue-400 transition-colors duration-300 flex justify-center">
+            <div className="absolute top-2 w-1 h-3 bg-blue-400 rounded-full animate-bounce"></div>
           </div>
-          <FaChevronDown
-            className="mt-2 group-hover:text-purple-400 transition-colors duration-300"
-            size={12}
-          />
+          <span className="mt-2 text-xs font-mono tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">
+            SCROLL
+          </span>
         </div>
       </button>
+
+      {/* Advanced Animations */}
+      <style jsx global>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes pulse-cursor {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+        }
+        @keyframes binaryRain {
+          from {
+            transform: translateY(-100vh);
+          }
+          to {
+            transform: translateY(100vh);
+          }
+        }
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+          25% {
+            transform: translateY(-20px) translateX(10px);
+          }
+          50% {
+            transform: translateY(0) translateX(20px);
+          }
+          75% {
+            transform: translateY(20px) translateX(10px);
+          }
+        }
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(-15px) translateX(-15px);
+          }
+        }
+        @keyframes float-slower {
+          0%,
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(10px) translateX(10px);
+          }
+        }
+        @keyframes hologram-pulse {
+          0% {
+            opacity: 0.1;
+          }
+          50% {
+            opacity: 0.3;
+          }
+          100% {
+            opacity: 0.1;
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+        .animate-pulse-cursor {
+          animation: pulse-cursor 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite;
+        }
+        .animate-float-slower {
+          animation: float-slower 12s ease-in-out infinite;
+        }
+        .hologram-effect {
+          animation: hologram-pulse 3s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

@@ -34,7 +34,7 @@ const Header = ({ user }) => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-black/90 backdrop-blur-xl border-b border-cyan-500/30 shadow-2xl shadow-cyan-500/20"
-          : "bg-transparent"
+          : "bg-transparent "
       }`}
     >
       {/* Futuristic glow effect - Adjusted for subtlety */}
