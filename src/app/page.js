@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import About from "./sections/About";
+
 import Contact from "./sections/Contact";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
-import Skills from "./sections/Skills";
+
 import Loading from "./loading"; // তোমার Loader import করো
+import AboutWithSkills from "./sections/About";
 
 export default function Home() {
   const [user, setUser] = useState([]);
@@ -34,8 +35,8 @@ export default function Home() {
     <div className="bg-slate-900 min-h-screen">
       <Header user={user} />
       <Hero user={user} />
-      <About user={user} />
-      <Skills />
+      <AboutWithSkills user={user} />
+
       <Projects />
       <Contact />
       <Footer />

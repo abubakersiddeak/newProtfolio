@@ -5,12 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const Hero = ({ user }) => {
-  const texts = [
-    "Web Developer",
-    "UI/UX Designer",
-    "Digital Creator",
-    "Tech Enthusiast",
-  ];
+  const texts = ["Web Developer", "UI/UX Designer", "Tech Enthusiast"];
   const heroRef = useRef(null);
   const particlesRef = useRef(null);
 
@@ -202,7 +197,7 @@ const Hero = ({ user }) => {
       {/* Cyberpunk-inspired Scroll Indicator */}
       <button
         onClick={scrollToNext}
-        className="cursor-pointer absolute bottom-2 lg:bottom-4 left-1/2 transform -translate-x-1/2 text-gray-500 hover:text-blue-400 transition-colors duration-300 group"
+        className="cursor-pointer absolute bottom-2 lg:bottom-4 left-1/2 transform -translate-x-1/2 text-gray-500 hover:text-blue-400 transition-colors duration-300 group z-40"
       >
         <div className="flex flex-col items-center">
           <div className="relative w-8 h-12 border-2 border-gray-700 rounded-full group-hover:border-blue-400 transition-colors duration-300 flex justify-center">

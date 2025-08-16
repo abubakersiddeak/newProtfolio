@@ -42,13 +42,13 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-12 sm:py-16 md:py-20 bg-black/60 font-mono transition-colors duration-300"
+      className="py-12 sm:py-16 md:py-14 bg-black/60 font-mono transition-colors duration-300"
     >
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
-              My Projects
+              MY PROJECTS
             </h2>
             <div className="w-16 sm:w-24 h-1 bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
           </div>
