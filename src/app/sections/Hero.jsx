@@ -3,6 +3,7 @@
 import TypingTextEffect from "../components/TypingTextEffect";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import HeroBg from "../components/HeroBg";
 
 const Hero = ({ user }) => {
   const texts = ["Web Developer", "UI/UX Designer", "Tech Enthusiast"];
@@ -20,16 +21,17 @@ const Hero = ({ user }) => {
     <section
       id="home"
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans"
+      className="min-h-screen  flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans "
     >
+      <HeroBg />
       {/* Futuristic Grid Background */}
       <div className="absolute inset-0 z-0 opacity-20">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+              linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: "40px 40px",
           }}
@@ -37,11 +39,11 @@ const Hero = ({ user }) => {
       </div>
 
       {/* Animated Binary Code Rain */}
-      <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
+      {/* <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute text-blue-400 text-xs font-mono whitespace-nowrap"
+            className="absolute text-blue-200 text-xs font-mono whitespace-nowrap"
             style={{
               left: `${Math.random() * 100}%`,
               animation: `binaryRain ${
@@ -58,7 +60,7 @@ const Hero = ({ user }) => {
               .join(" ")}
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Floating Particles */}
       <div

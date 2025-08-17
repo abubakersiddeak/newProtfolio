@@ -9,6 +9,7 @@ import Projects from "./sections/Projects";
 
 import Loading from "./loading"; // তোমার Loader import করো
 import AboutWithSkills from "./sections/About";
+import Background from "./components/Background";
 
 export default function Home() {
   const [user, setUser] = useState([]);
@@ -32,7 +33,8 @@ export default function Home() {
   if (loading) return <Loading />; // এখানে Loader দেখাবে
 
   return (
-    <div className="bg-slate-900 min-h-screen">
+    <div className=" min-h-screen relative">
+      <Background />
       <Header user={user} />
       <Hero user={user} />
       <AboutWithSkills user={user} />

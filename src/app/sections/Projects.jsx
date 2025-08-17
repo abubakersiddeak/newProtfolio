@@ -1,11 +1,11 @@
 "use client";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import AnimatedSection from "../components/AnimatedSection";
 import {
   FaGithub,
   FaExternalLinkAlt,
   FaTimes,
-  FaExpand,
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
@@ -40,10 +40,32 @@ const Projects = () => {
       : projects.filter((project) => project.category === selectedCategory);
 
   return (
-    <section
-      id="projects"
-      className="py-12 sm:py-16 md:py-14 bg-black/60 font-mono transition-colors duration-300"
-    >
+    <section id="projects" className="py-12  sm:py-16 md:py-14 ">
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-cyan-400/30 to-purple-400/30"
+            initial={{
+              x: Math.random() * 100,
+              y: Math.random() * 100,
+              width: Math.random() * 4 + 1,
+              height: Math.random() * 4 + 1,
+              opacity: Math.random() * 0.3 + 0.1,
+            }}
+            animate={{
+              y: [null, (Math.random() - 0.5) * 100],
+              x: [null, (Math.random() - 0.5) * 100],
+              transition: {
+                duration: Math.random() * 15 + 10,
+                repeat: Infinity,
+                repeatType: "reverse",
+              },
+            }}
+          />
+        ))}
+      </div>
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
