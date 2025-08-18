@@ -1,6 +1,7 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AnimatedSection from "../components/AnimatedSection";
 import {
   FaGithub,
@@ -18,6 +19,7 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [projects, setProjects] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   useEffect(() => {
     const fetchProject = async () => {
       try {
@@ -96,10 +98,10 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`cursor-pointer px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
+                className={`cursor-pointer px-4 sm:px-6 py-2 sm:py-2 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === category
                     ? " text-white shadow-lg bg-cyan-600"
-                    : " bg-slate-800 text-gray-300 hover:bg-slate-700 border border-indigo-500/20 shadow-lg"
+                    : " bg-transparent text-gray-300 hover:bg-slate-700 border border-dashed border-gray-200/20 shadow-lg"
                 }`}
               >
                 {category}
@@ -109,17 +111,23 @@ const Projects = () => {
         </AnimatedSection>
 
         {/* Futuristic Project Modal */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4  ">
           {filteredProjects.map((project, index) => (
             <AnimatedSection key={project._id} delay={index * 100}>
               {/* Futuristic Card Container */}
               <div
-                className={`bg-gradient-to-br from-gray-900/80 to-gray-800/90 rounded-xl border border-cyan-400/20 hover:border-cyan-400/40 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-1 group/card h-[350px] w-[85vw] md:h-[400px] xl:h-[450px] md:w-[25vw] xl:w-[25vw] 2xl:w-[25vw] flex flex-col  relative`}
+                className={`bg-transparent rounded-xl border border-cyan-400/20 hover:border-cyan-400/40 shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-1 group/card h-[350px] w-[85vw] md:h-[400px] xl:h-[450px] md:w-[25vw] xl:w-[25vw] 2xl:w-[25vw] flex flex-col  relative`}
               >
-                {/* Holographic Effect */}
-                <div className="absolute inset-0 rounded-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden ">
-                  <div className="absolute -inset-8 bg-[conic-gradient(from_90deg_at_50%_50%,#00ccff_0%,#7b00ff_50%,#00ccff_100%)] opacity-20 group-hover/card:opacity-30 animate-spin-slow"></div>
+                <div className="flex gap-2 p-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
+                {/* Holographic Effect */}
+                {/* Floating Tech Badge */}
+                <span className="absolute top-1 right-2  text-cyan-400 px-3 py-1  text-xs font-mono ">
+                  {project.category}
+                </span>
 
                 {/* Image Container with Full Screen Trigger */}
                 <div
@@ -140,15 +148,13 @@ const Projects = () => {
                       Click to expand
                     </span>
                   </div>
-
-                  {/* Floating Tech Badge */}
-                  <span className="absolute top-3 right-3 bg-gray-900/90 text-cyan-400 px-3 py-1 rounded-full text-xs font-mono border border-cyan-400/30 backdrop-blur-sm">
-                    {project.category}
-                  </span>
                 </div>
 
                 {/* Card Content */}
-                <div className="p-5 flex-1 flex flex-col h-[60%] xl:h-[55%]">
+                <div className="p-5 flex-1 flex flex-col h-[60%] xl:h-[55%] relative">
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden ">
+                    <div className="absolute -inset-8 bg-[conic-gradient(from_90deg_at_50%_50%,#00ccff_0%,#7b00ff_50%,#00ccff_100%)] opacity-20 group-hover/card:opacity-30 animate-spin-slow"></div>
+                  </div>
                   <h3 className="text-lg font-bold text-white mb-2 group-hover/card:text-cyan-400 transition-colors duration-300">
                     {project.title}
                   </h3>
