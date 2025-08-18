@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className=" py-8 font-mono  sm:py-12">
+    <footer className=" py-8 font-mono  sm:py-24 z-10">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Brand */}
@@ -18,7 +18,7 @@ const Footer = () => {
               Creating beautiful, functional, and user-friendly web
               applications.
             </p>
-            <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4">
+            {/* <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4 z-50">
               <a
                 href="https://github.com/abubakersiddeak"
                 className="text-gray-400 hover:text-indigo-400 transition-colors"
@@ -37,11 +37,11 @@ const Footer = () => {
               >
                 <FaFacebook size={18} className="sm:w-5 sm:h-5" />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
-          <div className="text-center sm:text-left">
+          {/* <div className="text-center sm:text-left">
             <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
               Quick Links
             </h4>
@@ -66,10 +66,10 @@ const Footer = () => {
                 )
               )}
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
-          <div className="text-center sm:text-left">
+          {/* <div className="text-center sm:text-left">
             <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
               Get In Touch
             </h4>
@@ -87,7 +87,7 @@ const Footer = () => {
                 Dhaka, Bangladesh
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="border-t border-slate-700 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">

@@ -152,7 +152,7 @@ const AboutWithSkills = ({ user }) => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 py-12 sm:py-16 md:py-14 ">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 py-12 sm:py-16 md:py-24 ">
         {/* Cosmic title */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -162,13 +162,21 @@ const AboutWithSkills = ({ user }) => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            <span className="font-extrabold font-mono text-cyan-500">
+            <span
+              className="font-extrabold font-mono text-cyan-500"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
               ABOUT & SKILLS
             </span>
           </h2>
           <div className="relative inline-block mt-6">
-            <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full" />
-            <div className="absolute -inset-1 bg-cyan-400/30 blur-md rounded-full" />
+            <div className="w-32 h-1 bg-gradient-to-r from-[#052E16] to-[#18FFFF] rounded-full" />
           </div>
         </motion.div>
 

@@ -1,5 +1,13 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playwrite+AU+NSW:wght@100..400&display=swap");
 /* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
+
+.font-cinzel {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
 @keyframes spin-slow {
   from {
     transform: rotate(0deg);

@@ -8,7 +8,6 @@ import {
 } from "react-icons/fa";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Background from "../components/Background";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -105,25 +104,35 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500 mb-4 tracking-tighter font-mono">
-            _CONTACT_NODE
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <span
+              className="font-extrabold font-mono text-cyan-500"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              CONTACT
+            </span>
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mb-6"></div>
-          <p className="text-gray-400 font-mono tracking-wider text-sm md:text-base">
-            INITIATE_DIRECT_LINK
-          </p>
+          <div className="relative inline-block mt-6">
+            <div className="w-32 h-1 bg-gradient-to-r from-[#052E16] to-[#18FFFF] rounded-full" />
+          </div>
         </motion.div>
 
         <div
-          className="grid lg:grid-cols-2 gap-10 md:gap-14"
+          className="flex  flex-col lg:flex-row  relative justify-between items-center gap-4"
           onMouseMove={handleMouseMove}
         >
-          {/* Contact Terminal Panel */}
+          {/* Contact  Panel */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-gray-900/80 border border-cyan-400/20 rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10"
+            className="bg-transparent border h-[60%] border-cyan-400/20 rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10"
           >
             <div className="flex items-center gap-2 mb-8">
               <div className="flex gap-2">
@@ -132,7 +141,7 @@ const Contact = () => {
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <h3 className="text-cyan-400 font-mono text-lg md:text-xl tracking-tight">
-                CONTACT_TERMINAL
+                CONTACT INFO
               </h3>
             </div>
 
@@ -145,9 +154,7 @@ const Contact = () => {
                   <FaEnvelope className="text-lg" />
                 </div>
                 <div>
-                  <h4 className="text-gray-300 font-mono text-xs tracking-wider">
-                    DATA_TRANSFER
-                  </h4>
+                  <h4 className="text-gray-300 font-mono text-xs tracking-wider"></h4>
                   <a
                     href="mailto:abubakersiddeak@gmail.com"
                     className="text-white hover:text-cyan-400 transition-colors font-mono text-sm md:text-base"
@@ -165,9 +172,7 @@ const Contact = () => {
                   <FaPhone className="text-lg" />
                 </div>
                 <div>
-                  <h4 className="text-gray-300 font-mono text-xs tracking-wider">
-                    VOICE_LINK
-                  </h4>
+                  <h4 className="text-gray-300 font-mono text-xs tracking-wider"></h4>
                   <div className="space-y-1">
                     <a
                       href="tel:+8801560045388"
@@ -193,9 +198,7 @@ const Contact = () => {
                   <FaMapMarkerAlt className="text-lg" />
                 </div>
                 <div>
-                  <h4 className="text-gray-300 font-mono text-xs tracking-wider">
-                    LOCATION_DATA
-                  </h4>
+                  <h4 className="text-gray-300 font-mono text-xs tracking-wider"></h4>
                   <p className="text-white font-mono text-sm md:text-base">
                     Dhaka, Bangladesh
                   </p>
@@ -209,7 +212,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-gray-900/80 border border-cyan-400/20 rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10"
+            className="bg-transparent border border-cyan-400/20 rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10  h-[60%]"
             style={{ rotateX, rotateY }}
             ref={formRef}
           >
@@ -220,7 +223,7 @@ const Contact = () => {
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <h3 className="text-cyan-400 font-mono text-lg md:text-xl tracking-tight">
-                MESSAGE_TRANSMITTER
+                MESSAGE
               </h3>
             </div>
 
@@ -246,7 +249,7 @@ const Contact = () => {
                   transition={{ delay: 0.5 }}
                 >
                   <label className="block text-gray-400 font-mono text-xs tracking-wider mb-2">
-                    IDENTIFIER
+                    Name
                   </label>
                   <input
                     type="text"
@@ -255,7 +258,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-gray-900/50 text-white font-mono border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/30 transition-all"
-                    placeholder="ENTER_NAME"
+                    placeholder=""
                   />
                 </motion.div>
 
@@ -265,7 +268,7 @@ const Contact = () => {
                   transition={{ delay: 0.6 }}
                 >
                   <label className="block text-gray-400 font-mono text-xs tracking-wider mb-2">
-                    TRANSMITTER_ID
+                    Email
                   </label>
                   <input
                     type="email"
@@ -274,7 +277,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-gray-900/50 text-white font-mono border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/30 transition-all"
-                    placeholder="USER@DOMAIN.COM"
+                    placeholder=""
                   />
                 </motion.div>
               </div>
@@ -285,7 +288,7 @@ const Contact = () => {
                 transition={{ delay: 0.7 }}
               >
                 <label className="block text-gray-400 font-mono text-xs tracking-wider mb-2">
-                  SUBJECT_LINE
+                  Subject
                 </label>
                 <input
                   type="text"
@@ -294,7 +297,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-gray-900/50 text-white font-mono border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/30 transition-all"
-                  placeholder="MESSAGE_SUBJECT"
+                  placeholder=""
                 />
               </motion.div>
 
@@ -304,7 +307,7 @@ const Contact = () => {
                 transition={{ delay: 0.8 }}
               >
                 <label className="block text-gray-400 font-mono text-xs tracking-wider mb-2">
-                  MESSAGE_CONTENT
+                  Drop your message
                 </label>
                 <textarea
                   name="message"
@@ -313,7 +316,7 @@ const Contact = () => {
                   required
                   rows="5"
                   className="w-full px-4 py-3 bg-gray-900/50 text-white font-mono border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400/30 transition-all resize-none"
-                  placeholder="ENTER_MESSAGE_DATA"
+                  placeholder=""
                 ></textarea>
               </motion.div>
 
@@ -325,7 +328,7 @@ const Contact = () => {
                 transition={{ delay: 0.9 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed font-mono tracking-wider flex items-center justify-center gap-2"
+                className="cursor-pointer w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed font-mono tracking-wider flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -339,12 +342,12 @@ const Contact = () => {
                         d="M12 20c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 9.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"
                       />
                     </svg>
-                    TRANSMITTING...
+                    Sending...
                   </>
                 ) : (
                   <>
                     <FaPaperPlane />
-                    INITIATE_TRANSMISSION
+                    Send
                   </>
                 )}
               </motion.button>

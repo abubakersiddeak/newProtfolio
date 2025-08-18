@@ -97,22 +97,29 @@ const Hero = ({ user }) => {
           {/* Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1 animate-fade-in-up">
             <div className="relative inline-block mb-2 md:mb-4 lg:mb-6">
-              <h1 className="relative text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white leading-tight tracking-tight">
-                <span className="bg-clip-text  bg-gradient-to-r text-white">
-                  {user.length !== 0
-                    ? user[0].name?.toUpperCase()
-                    : "LOADING..."}
+              <h1 className="hero-heading text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-100 leading-tight max-w-full font-cinzel">
+                Hi, I&apos;m{" "}
+                <span
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  ZISAN
                 </span>
               </h1>
             </div>
 
-            <div className="text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 md:mb-4 lg:mb-6 h-8 sm:h-10 font-mono">
+            <div className="text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 2xl:mb-6 h-8 sm:h-10 font-cinzel">
               <span className="text-blue-400">&gt; </span>
               <TypingTextEffect texts={texts} />
               <span className="animate-pulse-cursor text-blue-400">_</span>
             </div>
 
-            <p className="hidden md:block text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="hidden md:block text-base sm:text-lg text-gray-400 mb-8 sm:mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed font-cinzel">
               I craft <span className="">cutting-edge digital experiences</span>{" "}
               at the intersection of design and technology. Specializing in{" "}
               <span className="">immersive interfaces</span> and{" "}
@@ -126,7 +133,7 @@ const Hero = ({ user }) => {
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="group cursor-pointer relative bg-gradient-to-r bg-cyan-400  px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-sm sm:text-base font-mono overflow-hidden group"
+                className="group cursor-pointer relative border border-cyan-400 bg-gradient-to-r bg-cyan-600  px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-[10px] sm:text-[12px] font-mono overflow-hidden group"
               >
                 <div className="absolute bg-amber-50 h-full w-full left-5 top-0 z-10 group-hover:translate-x-[100%] duration-750"></div>
                 <span className="relative z-10 text-black">View Projects</span>
@@ -138,7 +145,7 @@ const Hero = ({ user }) => {
                     .getElementById("contact")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="cursor-pointer relative border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base font-mono group overflow-hidden"
+                className="cursor-pointer relative border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-[10px] sm:text-[12px] font-mono group overflow-hidden"
               >
                 <span className="relative z-10">Quick Contact</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

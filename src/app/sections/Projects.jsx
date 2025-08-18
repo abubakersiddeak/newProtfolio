@@ -69,10 +69,23 @@ const Projects = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-mono text-cyan-500   mb-4 sm:mb-6">
-              MY PROJECTS
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+              <span
+                className="font-extrabold font-mono text-cyan-500"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                MY PROJECTS
+              </span>
             </h2>
-            <div className="w-16 sm:w-24 h-1 bg-indigo-400 mx-auto mb-6 sm:mb-8"></div>
+            <div className="relative inline-block mt-6">
+              <div className="w-32 h-1 bg-gradient-to-r from-[#052E16] to-[#18FFFF] rounded-full" />
+            </div>
           </div>
         </AnimatedSection>
 

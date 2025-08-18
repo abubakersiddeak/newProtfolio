@@ -8,6 +8,10 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { MdAddTask } from "react-icons/md";
+import { TiHomeOutline } from "react-icons/ti";
+import { FiSend } from "react-icons/fi";
+import { FaRegUser } from "react-icons/fa";
 
 const Header = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,11 +36,11 @@ const Header = ({ user }) => {
 
   // Unique navigation items with custom icons
   const navItems = [
-    { id: "home", name: "Home", icon: "⌂" },
-    { id: "about", name: "About", icon: "⍟" },
+    { id: "home", name: "Home", icon: <TiHomeOutline /> },
+    { id: "about", name: "About", icon: <FaRegUser /> },
 
-    { id: "projects", name: "Work", icon: "🖥️" },
-    { id: "contact", name: "Connect", icon: "✉" },
+    { id: "projects", name: "Projects", icon: <MdAddTask /> },
+    { id: "contact", name: "Connect", icon: <FiSend /> },
   ];
 
   return (
@@ -61,7 +65,16 @@ const Header = ({ user }) => {
           onClick={() => scrollToSection("home")}
           aria-label="Scroll to top"
         >
-          <span className="text-transparent bg-clip-text bg-cyan-400 ">
+          <span
+            className="text-transparent bg-clip-text bg-cyan-400 "
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
             &lt;DevZisan/&gt;
           </span>
           <span className="inline-block w-2 h-2 ml-1 bg-cyan-400 rounded-full animate-pulse"></span>
@@ -78,14 +91,23 @@ const Header = ({ user }) => {
                   onClick={() => scrollToSection(item.id)}
                   className="relative px-4 py-2 rounded-lg group cursor-pointer"
                 >
-                  <span className="relative z-10 flex items-center gap-2 text-cyan-400 group-hover:text-white transition-colors duration-300">
-                    <span className="text-[#4f46e5]">{item.icon}</span>
+                  <span
+                    className="relative z-10 flex items-center gap-2 text-cyan-400 group-hover:text-white transition-colors duration-300"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                    }}
+                  >
+                    <span className="text-white">{item.icon}</span>
                     {item.name}
                   </span>
                   {hoveredNav === item.id && (
                     <motion.div
                       layoutId="navHover"
-                      className="absolute inset-0 bg-[#1e1e2e] rounded-lg border border-[#4f46e5]/50 shadow-lg shadow-[#4f46e5]/20"
+                      className="absolute inset-0 bg-[#1e1e2e] rounded-lg border border-[#052E16] shadow-lg shadow-[#18FFFF]/20"
                       transition={{ type: "spring", bounce: 0.25 }}
                     />
                   )}
