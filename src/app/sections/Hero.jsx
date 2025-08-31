@@ -2,13 +2,137 @@
 
 import TypingTextEffect from "../components/TypingTextEffect";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import HeroBg from "../components/HeroBg";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = ({ user }) => {
   const texts = ["Web Developer", "UI/UX Designer", "Tech Enthusiast"];
-  const heroRef = useRef(null);
-  const particlesRef = useRef(null);
+  const container = useRef(null);
+
+  useGSAP(
+    () => {
+      // Enhanced text animation with 3D effect and glow
+      gsap.to(".herotextcontent", {
+        x: -500,
+        rotationY: -30,
+        opacity: 0,
+        scale: 0.8,
+        filter: "blur(10px)",
+        scrollTrigger: {
+          trigger: ".herotextcontent",
+          start: "top 10%",
+          end: "bottom 60%",
+          scrub: 3.5,
+          markers: false, // Disable markers for production
+        },
+        ease: "power3.inOut",
+      });
+
+      // Enhanced image animation with 3D perspective and glow
+      gsap.to(".heroimagecontent", {
+        x: 400,
+        rotationY: 30,
+        opacity: 0,
+        scale: 0.8,
+        filter: "blur(10px)",
+        scrollTrigger: {
+          trigger: ".heroimagecontent",
+          start: "top 10%",
+          end: "bottom 60%",
+          scrub: 3.5,
+          markers: false,
+        },
+        ease: "power3.inOut",
+      });
+
+      // Animate the grid background for a more dynamic feel
+      gsap.to(".grid-bg", {
+        backgroundPosition: "40px 40px",
+        duration: 20,
+        repeat: -1,
+        ease: "none",
+      });
+
+      // Holographic floating elements animation
+      gsap.to(".float-element", {
+        y: -20,
+        rotation: 5,
+        opacity: 0.7,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.5,
+        ease: "sine.inOut",
+      });
+
+      // Initial entrance animations
+      const tl = gsap.timeline();
+      tl.from(".hero-heading", {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      })
+        .from(
+          ".typing-text",
+          {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        )
+        .from(
+          ".hero-description",
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        )
+        .from(
+          ".hero-buttons",
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        )
+        .from(
+          ".tech-stack",
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.2"
+        )
+        .from(
+          ".hero-image",
+          {
+            scale: 0.8,
+            rotationY: -180,
+            opacity: 0,
+            duration: 1.5,
+            ease: "back.out(1.7)",
+          },
+          "-=0.5"
+        );
+    },
+    { scope: container }
+  );
 
   const scrollToNext = () => {
     const aboutSection = document.getElementById("about");
@@ -20,12 +144,13 @@ const Hero = ({ user }) => {
   return (
     <section
       id="home"
-      ref={heroRef}
-      className="min-h-screen  flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans "
+      ref={container}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans"
     >
       <HeroBg />
-      {/* Futuristic Grid Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
+
+      {/* Enhanced Futuristic Grid Background */}
+      <div className="grid-bg absolute inset-0 z-0 opacity-20">
         <div
           className="absolute inset-0"
           style={{
@@ -38,37 +163,7 @@ const Hero = ({ user }) => {
         ></div>
       </div>
 
-      {/* Animated Binary Code Rain */}
-      {/* <div className="absolute inset-0 z-0 overflow-hidden opacity-10">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute text-blue-200 text-xs font-mono whitespace-nowrap"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animation: `binaryRain ${
-                Math.random() * 10 + 5
-              }s linear infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-              writingMode: "vertical-rl",
-              textOrientation: "mixed",
-            }}
-          >
-            {Array(50)
-              .fill(0)
-              .map(() => Math.round(Math.random()))
-              .join(" ")}
-          </div>
-        ))}
-      </div> */}
-
-      {/* Floating Particles */}
-      <div
-        ref={particlesRef}
-        className="absolute inset-0 z-0 pointer-events-none"
-      />
-
-      {/* Glowing Grid Lines */}
+      {/* Animated Glowing Grid Lines */}
       <svg
         className="absolute inset-0 w-full h-full z-0 opacity-20"
         xmlns="http://www.w3.org/2000/svg"
@@ -92,10 +187,38 @@ const Hero = ({ user }) => {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
+      {/* Holographic particles/effects */}
+      <div className="absolute inset-0 z-5 overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`float-element absolute w-${i + 2} h-${
+              i + 2
+            } rounded-full bg-cyan-500/10 blur-xl`}
+            style={{
+              top: `${20 + i * 15}%`,
+              left: `${10 + i * 15}%`,
+            }}
+          ></div>
+        ))}
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i + 5}
+            className={`float-element absolute w-${i + 2} h-${
+              i + 2
+            } rounded-full bg-purple-500/10 blur-xl`}
+            style={{
+              top: `${15 + i * 12}%`,
+              right: `${5 + i * 10}%`,
+            }}
+          ></div>
+        ))}
+      </div>
+
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-20">
         <div className="grid lg:grid-cols-2 gap-5 md:gap-10 lg:gap-24 items-center">
           {/* Text Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1 animate-fade-in-up">
+          <div className="herotextcontent text-center lg:text-left order-2 lg:order-1">
             <div className="relative inline-block mb-2 md:mb-4 lg:mb-6">
               <h1 className="hero-heading text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-100 leading-tight max-w-full font-cinzel">
                 Hi, I&apos;m{" "}
@@ -113,27 +236,27 @@ const Hero = ({ user }) => {
               </h1>
             </div>
 
-            <div className="text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 2xl:mb-6 h-8 sm:h-10 font-cinzel">
+            <div className="typing-text text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 2xl:mb-6 h-8 sm:h-10 font-cinzel">
               <span className="text-blue-400">&gt; </span>
               <TypingTextEffect texts={texts} />
               <span className="animate-pulse-cursor text-blue-400">_</span>
             </div>
 
-            <p className="hidden md:block text-base sm:text-lg text-gray-400 mb-8 sm:mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed font-cinzel">
+            <p className="hero-description hidden md:block text-base sm:text-lg text-gray-400 mb-8 sm:mb-5 max-w-xl mx-auto lg:mx-0 leading-relaxed font-cinzel">
               I craft <span className="">cutting-edge digital experiences</span>{" "}
               at the intersection of design and technology. Specializing in{" "}
               <span className="">immersive interfaces</span> and{" "}
               <span className="">high-performance applications</span>.
             </p>
 
-            <div className="flex flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+            <div className="hero-buttons flex flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
               <button
                 onClick={() =>
                   document
                     .getElementById("projects")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="group cursor-pointer relative border border-cyan-400 bg-gradient-to-r bg-cyan-600  px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-[10px] sm:text-[12px] font-mono overflow-hidden group"
+                className="group cursor-pointer relative border border-cyan-400 bg-gradient-to-b from-[#052E16] via-[#18FFFF] to-[#052E16] px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 text-[10px] sm:text-[12px] font-mono overflow-hidden group"
               >
                 <div className="absolute bg-amber-50 h-full w-full left-5 top-0 z-10 group-hover:translate-x-[100%] duration-750"></div>
                 <span className="relative z-10 text-black">View Projects</span>
@@ -145,20 +268,33 @@ const Hero = ({ user }) => {
                     .getElementById("contact")
                     .scrollIntoView({ behavior: "smooth" })
                 }
-                className="cursor-pointer relative border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-[10px] sm:text-[12px] font-mono group overflow-hidden"
+                className="cursor-pointer relative border-2 border-cyan-400 text-cyan-400 hover:bg-transparent px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-[10px] sm:text-[12px] font-mono group overflow-hidden"
               >
-                <span className="relative z-10">Quick Contact</span>
+                <span
+                  className="relative z-10 hover:text-white"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  Quick Contact
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </div>
 
             {/* Tech Stack Indicators */}
-            <div className="mt-12 hidden md:flex flex-wrap justify-center lg:justify-start gap-3">
+            <div className="tech-stack mt-12 hidden md:flex flex-wrap justify-center lg:justify-start gap-3">
               {["React", "framer-motion", "Next.js", "Node.js", "Mongodb"].map(
-                (tech) => (
+                (tech, index) => (
                   <div
                     key={tech}
-                    className="px-3 py-1.5 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-800 text-xs font-mono text-gray-300 hover:text-blue-400 transition-colors"
+                    className={`tech-item px-3 py-1.5 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-800 text-xs font-mono text-gray-300 hover:text-blue-400 transition-colors delay-${
+                      index * 100
+                    }`}
                   >
                     {tech}
                   </div>
@@ -168,8 +304,8 @@ const Hero = ({ user }) => {
           </div>
 
           {/* Holographic Profile Interface */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2 animate-fade-in-up ">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-110 md:h-110 2xl:w-130 2xl:h-130 rounded-xl overflow-hidden group  border-amber-100 border-b-4">
+          <div className="heroimagecontent test flex justify-center lg:justify-end order-1 lg:order-2">
+            <div className="hero-image relative w-64 h-64 sm:w-80 sm:h-80 md:w-110 md:h-110 2xl:w-130 2xl:h-130 rounded-xl overflow-hidden group border-amber-100 border-b-4">
               {/* Holographic Border */}
               <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-blue-400/30 transition-all duration-500"></div>
 
@@ -186,8 +322,8 @@ const Hero = ({ user }) => {
                     user.length !== 0 ? user[0].mainImage : "/placeholder.svg"
                   }
                   alt="Profile Image"
-                  layout="fill"
-                  objectFit="cover"
+                  fill // layout="fill" এর পরিবর্তে
+                  style={{ objectFit: "cover" }} // objectFit এর পরিবর্তে
                   className="w-full h-full transition-all duration-500 transform group-hover:scale-105"
                 />
 
@@ -291,6 +427,14 @@ const Hero = ({ user }) => {
             opacity: 0.1;
           }
         }
+        @keyframes grid-move {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 40px 40px;
+          }
+        }
         .animate-fade-in-up {
           animation: fade-in-up 0.8s ease-out forwards;
         }
@@ -305,6 +449,9 @@ const Hero = ({ user }) => {
         }
         .hologram-effect {
           animation: hologram-pulse 3s ease-in-out infinite;
+        }
+        .grid-move {
+          animation: grid-move 20s linear infinite;
         }
       `}</style>
     </section>

@@ -34,3 +34,23 @@
 .group-hover .group-hover\:animate-float {
   animation: float 3s ease-in-out infinite;
 }
+/* jafosdjfkasdhf */
+
+.projects-wrapper {
+  display: flex;
+  height: 100%;
+  /* This width allows all project cards to be placed side-by-side. */
+  width: fit-content;
+}
+
+/* Each project card takes up the full viewport width */
+.project-card {
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100%;
+}
+
+/* Style for the hover overlay on images */
+.project-overlay {
+  transition: opacity 0.3s ease;
+}

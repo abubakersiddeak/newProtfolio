@@ -207,8 +207,8 @@ export default function ProjectList({ projects }) {
                 <Image
                   src={project.image[0].url} // Displaying the first image as a thumbnail
                   alt={project.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill // layout="fill" এর পরিবর্তে
+                  style={{ objectFit: "cover" }} // objectFit এর পরিবর্তে
                   className="transition-transform duration-500 hover:scale-105"
                 />
               ) : (
