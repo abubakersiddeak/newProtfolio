@@ -7,6 +7,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ResumeDownload from "../components/ResumeDownload";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,8 +148,9 @@ const Hero = ({ user }) => {
       ref={container}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black/70 text-white font-sans"
     >
+      {" "}
+      <ResumeDownload />
       <HeroBg />
-
       {/* Enhanced Futuristic Grid Background */}
       <div className="grid-bg absolute inset-0 z-0 opacity-20">
         <div
@@ -162,7 +164,6 @@ const Hero = ({ user }) => {
           }}
         ></div>
       </div>
-
       {/* Animated Glowing Grid Lines */}
       <svg
         className="absolute inset-0 w-full h-full z-0 opacity-20"
@@ -186,7 +187,6 @@ const Hero = ({ user }) => {
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
-
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-20">
         <div className="grid lg:grid-cols-2 gap-5 md:gap-10 lg:gap-24 items-center">
           {/* Text Content */}
@@ -310,7 +310,6 @@ const Hero = ({ user }) => {
           </div>
         </div>
       </div>
-
       {/* Cyberpunk-inspired Scroll Indicator */}
       <button
         onClick={scrollToNext}
@@ -325,7 +324,6 @@ const Hero = ({ user }) => {
           </span>
         </div>
       </button>
-
       {/* Advanced Animations */}
       <style jsx global>{`
         @keyframes fade-in-up {

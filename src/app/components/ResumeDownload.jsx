@@ -118,8 +118,8 @@ const ResumeDownload = () => {
     setIsDownloading(true);
     setTimeout(() => {
       const link = document.createElement("a");
-      link.href = "/path-to-your-resume.pdf";
-      link.download = "YourName-Resume.pdf";
+      link.href = "/zisan-resume.pdf";
+      link.download = "/zisan-resume.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -128,7 +128,7 @@ const ResumeDownload = () => {
   };
 
   return (
-    <div ref={containerRef} className="fixed top-6 right-6 z-40">
+    <div ref={containerRef} className="absolute top-5 md:top-6 right-6 z-40">
       {/* 🔹 Ring */}
       <div
         ref={ringRef}

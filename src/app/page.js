@@ -10,7 +10,6 @@ import Projects from "./sections/Projects";
 import Loading from "./loading"; // তোমার Loader import করো
 import AboutWithSkills from "./sections/About";
 import Background from "./components/Background";
-import ResumeDownload from "./components/ResumeDownload";
 
 export default function Home() {
   const [user, setUser] = useState([]);
@@ -37,7 +36,7 @@ export default function Home() {
     <div className=" min-h-screen relative">
       <Background />
       <Header user={user} />
-      <ResumeDownload />
+
       <Hero user={user} />
       <AboutWithSkills user={user} />
 
