@@ -187,34 +187,6 @@ const Hero = ({ user }) => {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      {/* Holographic particles/effects */}
-      <div className="absolute inset-0 z-5 overflow-hidden">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className={`float-element absolute w-${i + 2} h-${
-              i + 2
-            } rounded-full bg-cyan-500/10 blur-xl`}
-            style={{
-              top: `${20 + i * 15}%`,
-              left: `${10 + i * 15}%`,
-            }}
-          ></div>
-        ))}
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i + 5}
-            className={`float-element absolute w-${i + 2} h-${
-              i + 2
-            } rounded-full bg-purple-500/10 blur-xl`}
-            style={{
-              top: `${15 + i * 12}%`,
-              right: `${5 + i * 10}%`,
-            }}
-          ></div>
-        ))}
-      </div>
-
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-20">
         <div className="grid lg:grid-cols-2 gap-5 md:gap-10 lg:gap-24 items-center">
           {/* Text Content */}

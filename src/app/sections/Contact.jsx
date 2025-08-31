@@ -44,15 +44,26 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate data transmission
-    await animate(formRef.current, { opacity: [1, 0.3, 1] }, { duration: 0.8 });
-
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSubmitMessage("TRANSMISSION SUCCESSFUL • RESPONSE INCOMING");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch {
-      setSubmitMessage("TRANSMISSION FAILED • RETRY CONNECTION");
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSubmitMessage("TRANSMISSION SUCCESSFUL • RESPONSE INCOMING");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitMessage(
+          data.error || "TRANSMISSION FAILED • RETRY CONNECTION"
+        );
+      }
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setSubmitMessage("TRANSMISSION FAILED • SERVER UNAVAILABLE");
     } finally {
       setIsSubmitting(false);
     }
