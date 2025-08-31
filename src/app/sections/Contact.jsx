@@ -54,7 +54,9 @@ const Contact = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setSubmitMessage("TRANSMISSION SUCCESSFUL • RESPONSE INCOMING");
+        setSubmitMessage(
+          "TRANSMISSION SUCCESSFUL • RESPONSE INCOMING ON YOUR GMAIL"
+        );
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setSubmitMessage(
