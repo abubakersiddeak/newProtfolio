@@ -31,7 +31,7 @@ const customStyles = `
   .project-card-enhanced {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(17, 24, 39, 0.8), rgba(31, 41, 55, 0.6));
+    
     backdrop-filter: blur(10px);
     border: 1px solid rgba(59, 130, 246, 0.1);
   }
@@ -43,7 +43,7 @@ const customStyles = `
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    
     transition: left 0.5s;
   }
 
@@ -115,7 +115,6 @@ const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [projects, setProjects] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const categories = ["All", "Full Stack", "Frontend", "Mobile"];
 
@@ -124,15 +123,13 @@ const Projects = () => {
   const gridContainerRef = useRef(null);
   const titleRef = useRef(null);
   const categoryRef = useRef(null);
-  const backgroundRef = useRef(null);
+
   const scrollIndicatorRef = useRef(null);
 
   // Simulate data fetching
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        setIsLoading(true);
-
         const res = await fetch("/api/project"); // এখানে "/" দিতে হবে
         if (!res.ok) {
           throw new Error("Failed to fetch");
@@ -149,7 +146,6 @@ const Projects = () => {
       } catch (error) {
         console.error("Error fetching projects:", error);
       } finally {
-        setIsLoading(false);
       }
     };
 
@@ -261,7 +257,7 @@ const Projects = () => {
         }
       );
     },
-    { scope: projectContainerRef, dependencies: [projects, isLoading] }
+    { scope: projectContainerRef, dependencies: [projects] }
   );
 
   const filteredProjects =
@@ -277,17 +273,6 @@ const Projects = () => {
   const closeModal = () => {
     setSelectedProject(null);
   };
-
-  if (isLoading) {
-    return (
-      <section className="py-20 text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-xl font-mono text-cyan-400">Loading Projects...</p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section
@@ -360,7 +345,7 @@ const Projects = () => {
         </AnimatedProjectSection>
 
         {/* --- PROJECTS GRID --- */}
-        {/* On large screens (lg), this remains horizontal, but on mobile, it becomes a vertical grid */}
+
         <div className="relative">
           <div
             ref={gridContainerRef}
@@ -404,14 +389,14 @@ const Projects = () => {
                     {project.category}
                   </span>
                 </div>
-                <div className="relative h-30 2xl:h-44 overflow-hidden">
+                <div className="relative h-30 2xl:h-44 overflow-hidden ">
                   <Image
                     src={project.image[0].url}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
+                    className="object-cover transition-transform duration-700 hover:scale-110 p-1"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
+
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-600/0 hover:from-cyan-500/10 hover:to-purple-600/10 transition-all duration-500"></div>
                 </div>
                 <div className="2xl:p-6 p-4 flex-1 flex flex-col">
@@ -455,7 +440,7 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg hover:from-cyan-400 hover:to-purple-500 transition-all text-[10px] 2xl:text-sm font-semibold group"
+                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 bg-cyan-500 rounded-lg hover:from-cyan-700  transition-all text-[10px] 2xl:text-sm font-semibold group"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => e.stopPropagation()}
@@ -494,7 +479,7 @@ const Projects = () => {
             onClick={closeModal}
           >
             <motion.div
-              className="modal-content max-w-6xl w-full max-h-[90vh] glass-effect rounded-2xl overflow-hidden relative"
+              className="modal-content max-w-6xl w-full 2xl:max-h-[90vh] glass-effect rounded-2xl overflow-hidden relative "
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -503,7 +488,7 @@ const Projects = () => {
             >
               <motion.button
                 onClick={closeModal}
-                className="absolute top-4 right-4 z-50 p-3 glass-effect rounded-full hover:bg-red-500/20 transition-all group"
+                className="absolute top-4 right-4 z-50 p-3 glass-effect rounded-full hover:bg-red-500/20 transition-all group cursor-pointer"
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -542,7 +527,7 @@ const Projects = () => {
                                 : selectedProject.image.length - 1
                             )
                           }
-                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
                           whileHover={{ scale: 1.1, x: -5 }}
                           whileTap={{ scale: 0.9 }}
                         >
@@ -556,7 +541,7 @@ const Projects = () => {
                                 : 0
                             )
                           }
-                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
                           whileHover={{ scale: 1.1, x: 5 }}
                           whileTap={{ scale: 0.9 }}
                         >
@@ -567,7 +552,7 @@ const Projects = () => {
                             <motion.button
                               key={idx}
                               onClick={() => setCurrentImageIndex(idx)}
-                              className={`w-3 h-3 rounded-full transition-all ${
+                              className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
                                 currentImageIndex === idx
                                   ? "bg-cyan-400 shadow-lg shadow-cyan-400/50"
                                   : "bg-gray-600 hover:bg-gray-400"
@@ -641,7 +626,7 @@ const Projects = () => {
                       href={selectedProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-xl hover:from-cyan-400 hover:to-purple-500 transition-all font-semibold group"
+                      className="flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 rounded-xl hover:from-cyan-700  transition-all font-semibold group"
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
