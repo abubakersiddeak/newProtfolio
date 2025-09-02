@@ -225,7 +225,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-transparent border border-cyan-400/20 rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10  h-[60%]"
+            className="bg-transparent border border-cyan-200/20 w-full md:w-[50%] rounded-xl p-6 md:p-8 backdrop-blur-sm shadow-2xl shadow-cyan-400/10  h-[60%]"
             style={{ rotateX, rotateY }}
             ref={formRef}
           >

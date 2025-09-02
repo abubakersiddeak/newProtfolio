@@ -128,7 +128,7 @@ const ResumeDownload = () => {
   };
 
   return (
-    <div ref={containerRef} className="absolute top-5 md:top-6 right-6 z-40">
+    <div ref={containerRef} className="absolute top-4 md:top-6 right-6 z-40">
       {/* 🔹 Ring */}
       <div
         ref={ringRef}

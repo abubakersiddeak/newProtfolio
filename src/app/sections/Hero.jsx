@@ -188,11 +188,11 @@ const Hero = ({ user }) => {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-20">
-        <div className="grid lg:grid-cols-2 gap-5 md:gap-10 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-10 lg:gap-24 items-center">
           {/* Text Content */}
           <div className="herotextcontent text-center lg:text-left order-2 lg:order-1">
             <div className="relative inline-block mb-2 md:mb-4 lg:mb-6">
-              <h1 className="hero-heading text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-100 leading-tight max-w-full font-cinzel">
+              <h1 className="hero-heading text-3xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-100 leading-tight max-w-full font-cinzel">
                 Hi, I&apos;m{" "}
                 <span
                   style={{
@@ -208,7 +208,7 @@ const Hero = ({ user }) => {
               </h1>
             </div>
 
-            <div className="typing-text text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-2 2xl:mb-6 h-8 sm:h-10 font-cinzel">
+            <div className="typing-text text-xl sm:text-2xl md:text-2xl 2xl:text-3xl font-light text-gray-400 mb-4 2xl:mb-6 h-8 sm:h-10 font-cinzel">
               <span className="text-blue-400">&gt; </span>
               <TypingTextEffect texts={texts} />
               <span className="animate-pulse-cursor text-blue-400">_</span>

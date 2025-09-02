@@ -125,6 +125,20 @@ const Projects = () => {
   const categoryRef = useRef(null);
 
   const scrollIndicatorRef = useRef(null);
+  useEffect(() => {
+    if (selectedProject) {
+      // Modal open হলে background scroll বন্ধ
+      document.body.style.overflow = "hidden";
+    } else {
+      // Modal বন্ধ হলে আবার scroll চালু
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
 
   // Simulate data fetching
   useEffect(() => {
@@ -349,7 +363,7 @@ const Projects = () => {
         <div className="relative">
           <div
             ref={gridContainerRef}
-            className="flex lg:flex-row flex-col gap-2 2xl:gap-6 pb-8 hide-scrollbar lg:overflow-x-scroll lg:w-max mx-auto min-h-[70vh] md:py-7 2xl:py-10"
+            className="flex lg:flex-row flex-col gap-2 lg:gap-6 pb-8 hide-scrollbar lg:overflow-x-scroll lg:w-max mx-auto min-h-[70vh] md:py-7 2xl:py-10"
             style={
               window.innerWidth >= 768
                 ? { width: `${filteredProjects.length * 500}px` }
@@ -359,12 +373,12 @@ const Projects = () => {
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project._id}
-                className="projectCard project-card-enhanced rounded-xl flex-shrink-0 w-full lg:w-96 h-[400px] 2xl:h-[500px] cursor-pointer relative overflow-hidden flex flex-col"
+                className="projectCard project-card-enhanced rounded-xl flex-shrink-0 w-full lg:w-90 h-[400px] 2xl:h-[500px] cursor-pointer relative overflow-hidden flex flex-col"
                 onClick={() => handleProjectClick(project)}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {/* Project Number */}
-                <div className="absolute top-4 left-4 z-10">
+                <div className="absolute top-7 left-3 z-10">
                   <span className="text-4xl font-black text-white/10">{`0${
                     index + 1
                   }`}</span>
@@ -377,18 +391,11 @@ const Projects = () => {
                     <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
                   </div>
-                  {project.featured && (
-                    <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-xs font-bold text-black">
-                      <FaStar className="text-[10px]" />
-                      <span>Featured</span>
-                    </div>
-                  )}
-                </div>
-                <div className="absolute top-0 right-2 z-10">
-                  <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-cyan-400 text-xs font-mono rounded-full border border-cyan-400/30">
+                  <span className=" text-cyan-400 text-xs font-mono ">
                     {project.category}
                   </span>
                 </div>
+
                 <div className="relative h-35 2xl:h-44 overflow-hidden ">
                   <Image
                     src={project.image[0].url}
@@ -428,7 +435,7 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 glass-effect rounded-lg hover:bg-gray-700/50 transition-all text-[14px] 2xl:text-lg group"
+                      className="flex items-center gap-2 2xl:px-5 px-3 2xl:py-2 py-1 glass-effect rounded-lg hover:bg-gray-700/50 transition-all text-[14px] 2xl:text-lg group"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => e.stopPropagation()}
@@ -440,7 +447,7 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 bg-cyan-500 rounded-lg hover:from-cyan-700  transition-all text-[14px] 2xl:text-lg font-semibold group"
+                      className="flex items-center gap-2 2xl:px-5 px-3 2xl:py-2 py-1 bg-cyan-500 rounded-lg hover:from-cyan-700  transition-all text-[14px] 2xl:text-lg font-semibold group"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => e.stopPropagation()}
@@ -472,31 +479,36 @@ const Projects = () => {
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-2 sm:p-4 overflow-y-auto "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
             <motion.div
-              className="modal-content max-w-6xl w-full 2xl:max-h-[90vh] glass-effect rounded-2xl overflow-hidden relative "
+              className="modal-content w-full max-w-6xl bg-gray-800/80 backdrop-blur-md rounded-lg relative 
+            h-[80vh] flex flex-col overflow-hidden "
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close button */}
               <motion.button
                 onClick={closeModal}
-                className="absolute top-4 right-4 z-50 p-3 glass-effect rounded-full hover:bg-red-500/20 transition-all group cursor-pointer"
+                className="absolute top-1 md:top-2 right-2 md:right-5 z-50 md:p-3 p-1 glass-effect rounded-full hover:bg-red-500/20 transition-all group cursor-pointer"
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <FaTimes className="text-xl group-hover:text-red-400 transition-colors" />
+                <FaTimes className="md:text-xl text-[10px] md:text-white text-red-500 group-hover:text-red-400 transition-colors" />
               </motion.button>
-              <div className="flex flex-col lg:flex-row h-full">
-                <div className="lg:w-2/3 relative h-64 lg:h-auto">
-                  <div className="relative w-full h-full bg-black">
+
+              {/* Content scrollable */}
+              <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto  lg:h-[50%]">
+                {/* Left side - images */}
+                <div className="lg:w-2/3 relative h-[80%] w-full lg:h-[100%] bg-gray-800/80 ">
+                  <div className="relative w-full h-full   ">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentImageIndex}
@@ -504,7 +516,7 @@ const Projects = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -100 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute inset-0"
+                        className="absolute  h-[90%] w-full   overflow-hidden"
                       >
                         <Image
                           src={selectedProject.image[currentImageIndex].url}
@@ -512,11 +524,12 @@ const Projects = () => {
                             currentImageIndex + 1
                           }`}
                           fill
-                          className="object-contain"
+                          className="object-contain md:p-2"
                           quality={100}
                         />
                       </motion.div>
                     </AnimatePresence>
+                    {/* Navigation arrows */}
                     {selectedProject.image.length > 1 && (
                       <>
                         <motion.button
@@ -527,11 +540,11 @@ const Projects = () => {
                                 : selectedProject.image.length - 1
                             )
                           }
-                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
+                          className="absolute left-1 lg:left-4 top-1/2 -translate-y-1/2 lg:p-3 p-1 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
                           whileHover={{ scale: 1.1, x: -5 }}
                           whileTap={{ scale: 0.9 }}
                         >
-                          <FaChevronLeft className="text-xl" />
+                          <FaChevronLeft className="lg:text-xl text-[10px]" />
                         </motion.button>
                         <motion.button
                           onClick={() =>
@@ -541,55 +554,49 @@ const Projects = () => {
                                 : 0
                             )
                           }
-                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
+                          className="absolute right-1 lg:right-4 top-1/2 -translate-y-1/2 lg:p-3 p-1 glass-effect rounded-full hover:bg-cyan-500/20 transition-all cursor-pointer"
                           whileHover={{ scale: 1.1, x: 5 }}
                           whileTap={{ scale: 0.9 }}
                         >
-                          <FaChevronRight className="text-xl" />
+                          <FaChevronRight className="lg:text-xl text-[10px]" />
                         </motion.button>
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                          {selectedProject.image.map((_, idx) => (
-                            <motion.button
-                              key={idx}
-                              onClick={() => setCurrentImageIndex(idx)}
-                              className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
-                                currentImageIndex === idx
-                                  ? "bg-cyan-400 shadow-lg shadow-cyan-400/50"
-                                  : "bg-gray-600 hover:bg-gray-400"
-                              }`}
-                              whileHover={{ scale: 1.2 }}
-                              whileTap={{ scale: 0.9 }}
-                            />
-                          ))}
+                        <div className=" w-full absolute bottom-3 flex justify-center items-center">
+                          <span className="text-cyan-500  font-bold">
+                            {currentImageIndex + 1} /{" "}
+                            {selectedProject.image.length}
+                          </span>
                         </div>
                       </>
                     )}
                   </div>
                 </div>
+
+                {/* Right side - details */}
                 <div className="lg:w-1/3 p-6 overflow-y-auto">
                   <div className="flex items-start justify-between mb-4">
                     <h2 className="text-2xl font-bold text-white">
                       {selectedProject.title}
                     </h2>
                     {selectedProject.featured && (
-                      <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-xs font-bold text-black">
+                      <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-xs font-bold text-white">
                         <FaStar className="text-[10px]" />
                         <span>Featured</span>
                       </div>
                     )}
                   </div>
+
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 text-xs rounded-full">
+                    <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 text-xs rounded-lg">
                       {selectedProject.category}
                     </span>
-                    <span className="text-gray-400 text-sm">
-                      {currentImageIndex + 1} / {selectedProject.image.length}
-                    </span>
                   </div>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
+
+                  <p className="text-gray-300 text-xs mb-6 leading-relaxed">
                     {selectedProject.longDescription ||
                       selectedProject.description}
                   </p>
+
+                  {/* Tech stack */}
                   <div className="mb-6">
                     <h3 className="text-sm font-semibold text-gray-400 mb-3 flex items-center gap-2">
                       <FaCode className="text-cyan-400" />
@@ -610,6 +617,8 @@ const Projects = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* Links */}
                   <div className="flex flex-col gap-3">
                     <motion.a
                       href={selectedProject.github}
@@ -626,7 +635,7 @@ const Projects = () => {
                       href={selectedProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 rounded-xl hover:from-cyan-700  transition-all font-semibold group"
+                      className="flex items-center justify-center gap-3 px-6 py-3 bg-cyan-500 rounded-xl hover:from-cyan-700 transition-all font-semibold group"
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
