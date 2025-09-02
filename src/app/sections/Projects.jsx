@@ -33,7 +33,7 @@ const customStyles = `
     overflow: hidden;
     
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(59, 130, 246, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.1);
   }
 
   .project-card-enhanced::before {
@@ -55,13 +55,13 @@ const customStyles = `
     content: '';
     position: absolute;
     inset: 0;
-    padding: 1px;
+    padding: 2px;
     background: linear-gradient(135deg, #0f172a, #3b82f6, #8b5cf6, #0f172a);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index: -1;
-    border-radius: 16px;
+    border-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -278,7 +278,7 @@ const Projects = () => {
     <section
       ref={projectContainerRef}
       id="projects"
-      className="py-20 text-white relative overflow-hidden min-h-screen"
+      className="py-5 2xl:py-20 text-white relative overflow-hidden min-h-screen"
     >
       <style>{customStyles}</style>
 
@@ -349,7 +349,7 @@ const Projects = () => {
         <div className="relative">
           <div
             ref={gridContainerRef}
-            className="flex lg:flex-row flex-col gap-2 2xl:gap-6 pb-8 hide-scrollbar lg:overflow-x-scroll lg:w-max mx-auto min-h-[60vh] md:py-7 2xl:py-10"
+            className="flex lg:flex-row flex-col gap-2 2xl:gap-6 pb-8 hide-scrollbar lg:overflow-x-scroll lg:w-max mx-auto min-h-[70vh] md:py-7 2xl:py-10"
             style={
               window.innerWidth >= 768
                 ? { width: `${filteredProjects.length * 500}px` }
@@ -359,7 +359,7 @@ const Projects = () => {
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project._id}
-                className="projectCard project-card-enhanced rounded-xl flex-shrink-0 w-full lg:w-96 h-[300px] 2xl:h-[500px] cursor-pointer relative overflow-hidden "
+                className="projectCard project-card-enhanced rounded-xl flex-shrink-0 w-full lg:w-96 h-[400px] 2xl:h-[500px] cursor-pointer relative overflow-hidden flex flex-col"
                 onClick={() => handleProjectClick(project)}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -389,7 +389,7 @@ const Projects = () => {
                     {project.category}
                   </span>
                 </div>
-                <div className="relative h-30 2xl:h-44 overflow-hidden ">
+                <div className="relative h-35 2xl:h-44 overflow-hidden ">
                   <Image
                     src={project.image[0].url}
                     alt={project.title}
@@ -400,10 +400,10 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-600/0 hover:from-cyan-500/10 hover:to-purple-600/10 transition-all duration-500"></div>
                 </div>
                 <div className="2xl:p-6 p-4 flex-1 flex flex-col">
-                  <h3 className="2xl:text-xl text-[13px] font-bold text-white 2xl:mb-3 mb-1 line-clamp-2">
+                  <h3 className="2xl:text-xl text-xl font-bold text-white 2xl:mb-3 mb-1 line-clamp-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 2xl:mb-3 mb-1 text-[10px] 2xl:text-sm line-clamp-3 flex-1">
+                  <p className="text-gray-300 2xl:mb-3 mb-1 text-[15px] 2xl:text-sm line-clamp-3 flex-1">
                     {project.description}
                   </p>
                   <div className="2xl:mb-4 mb-2">
@@ -411,13 +411,13 @@ const Projects = () => {
                       {project.technologies.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="2xl:text-xs text-[7px] font-mono bg-gray-800/80 text-cyan-300 2xl:px-3 px-2 py-1 rounded-full border border-gray-700/50 hover:border-cyan-400/50 transition-colors"
+                          className="2xl:text-xs text-[12px] font-mono bg-gray-800/80 text-cyan-300 2xl:px-3 px-2 py-1 rounded-lg border border-gray-700/50 hover:border-cyan-400/50 transition-colors"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="text-xs font-mono bg-gray-800/80 text-gray-400 px-3 py-1 rounded-full">
+                        <span className="text-xs font-mono bg-gray-800/80 flex justify-center items-center text-gray-400 px-3 py-1 rounded-lg">
                           +{project.technologies.length - 3}
                         </span>
                       )}
@@ -428,7 +428,7 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 glass-effect rounded-lg hover:bg-gray-700/50 transition-all text-[10px] 2xl:text-sm group"
+                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 glass-effect rounded-lg hover:bg-gray-700/50 transition-all text-[14px] 2xl:text-lg group"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => e.stopPropagation()}
@@ -440,7 +440,7 @@ const Projects = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 bg-cyan-500 rounded-lg hover:from-cyan-700  transition-all text-[10px] 2xl:text-sm font-semibold group"
+                      className="flex items-center gap-2 2xl:px-4 px-2 2xl:py-2 py-1 bg-cyan-500 rounded-lg hover:from-cyan-700  transition-all text-[14px] 2xl:text-lg font-semibold group"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => e.stopPropagation()}

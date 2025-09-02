@@ -7,7 +7,7 @@ import Contact from "./sections/Contact";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 
-import Loading from "./loading"; // তোমার Loader import করো
+import Loading from "./loading";
 import AboutWithSkills from "./sections/About";
 import Background from "./components/Background";
 

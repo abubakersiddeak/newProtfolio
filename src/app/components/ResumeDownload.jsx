@@ -118,8 +118,8 @@ const ResumeDownload = () => {
     setIsDownloading(true);
     setTimeout(() => {
       const link = document.createElement("a");
-      link.href = "/zisan-resume.pdf";
-      link.download = "/zisan-resume.pdf";
+      link.href = "/Resume-DevZisan.pdf";
+      link.download = "/Resume-DevZisan.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

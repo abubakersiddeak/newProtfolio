@@ -353,11 +353,11 @@ const AboutWithSkills = ({ user }) => {
                       key={i}
                       className="trustsection bg-black/40 border border-white/10 rounded-xl p-4 backdrop-blur-sm"
                     >
-                      <div className="flex items-center gap-2 text-cyan-400 mb-1">
-                        {stat.icon}
-                      </div>
-                      <div className="2xl:text-3xl text-xl font-bold text-white">
-                        {stat.value}
+                      <div className="flex gap-4 items-center">
+                        <div className=" text-cyan-400 ">{stat.icon}</div>
+                        <div className="2xl:text-3xl lg:text-2xl text-xl font-bold text-white">
+                          {stat.value}
+                        </div>
                       </div>
                       <div className="text-xs text-gray-400 uppercase tracking-wider">
                         {stat.label}
@@ -424,10 +424,10 @@ const AboutWithSkills = ({ user }) => {
                     transition={{ delay: index * 0.05 }}
                     viewport={{ once: true, margin: "-50px" }}
                     whileHover={{ y: -5 }}
-                    className="bg-black/40 p-4 rounded-xl border border-gray-800 hover:border-cyan-400/30 transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-cyan-400/10 cursor-pointer"
+                    className="bg-black/40 py-3 px-2 lg:p-4 rounded-xl border border-gray-800 hover:border-cyan-400/30 transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-cyan-400/10 cursor-pointer"
                   >
-                    <div className=" 2xl:text-2xl ">{skill.icon}</div>
-                    <span className="text-white font-medium text-[10px] 2xl:text-xs">
+                    <div className=" ">{skill.icon}</div>
+                    <span className="text-white font-medium ">
                       {skill.name}
                     </span>
                   </motion.div>
