@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import {
   FaBars,
   FaTimes,
   FaGithub,
   FaLinkedin,
   FaFacebook,
+  FaFileDownload,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdAddTask } from "react-icons/md";
@@ -17,242 +18,383 @@ const Header = ({ user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredNav, setHoveredNav] = useState(null);
+  const [activeSection, setActiveSection] = useState("home");
 
+  // Optimized scroll handler with throttling
   useEffect(() => {
+    let timeoutId;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (timeoutId) return;
+      timeoutId = setTimeout(() => {
+        setScrolled(window.scrollY > 50);
+        timeoutId = null;
+      }, 100);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  // Intersection Observer for active section detection
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -80% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+
+    const sections = ["home", "about", "projects", "contact"];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && isMenuOpen) setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const yOffset = -80;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
     setIsMenuOpen(false);
+    setActiveSection(sectionId);
+  }, []);
+
+  // Memoized navigation items
+  const navItems = useMemo(
+    () => [
+      { id: "home", name: "Home", icon: TiHomeOutline },
+      { id: "about", name: "About", icon: FaRegUser },
+      { id: "projects", name: "Projects", icon: MdAddTask },
+      { id: "contact", name: "Contact", icon: FiSend },
+    ],
+    []
+  );
+
+  // Memoized social links
+  const socialLinks = useMemo(() => {
+    if (!user || user.length === 0) return null;
+    return [
+      {
+        icon: FaGithub,
+        link: user[0]?.socialLinks?.github,
+        label: "GitHub",
+      },
+      {
+        icon: FaLinkedin,
+        link: user[0]?.socialLinks?.linkedin,
+        label: "LinkedIn",
+      },
+      {
+        icon: FaFacebook,
+        link: user[0]?.socialLinks?.facebook,
+        label: "Facebook",
+      },
+    ].filter((link) => link.link);
+  }, [user]);
+
+  // Resume download handler
+  const handleResumeDownload = () => {
+    const resumeUrl = user?.[0]?.resume || "/resume.pdf";
+    const link = document.createElement("a");
+    link.href = resumeUrl;
+    link.download = "Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
-
-  // Unique navigation items with custom icons
-  const navItems = [
-    { id: "home", name: "Home", icon: <TiHomeOutline /> },
-    { id: "about", name: "About", icon: <FaRegUser /> },
-
-    { id: "projects", name: "Projects", icon: <MdAddTask /> },
-    { id: "contact", name: "Connect", icon: <FiSend /> },
-  ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#0a0a12] backdrop-blur-3xl border-b border-[#4f46e5]/20 shadow-2xl shadow-[#4f46e5]/10"
+          ? "bg-neutral-950/95 backdrop-blur-xl border-b border-neutral-800/50 shadow-lg shadow-black/10"
           : "bg-transparent"
       }`}
     >
-      {/* Cyberpunk-style animated grid background */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
+      {/* Simplified background grid */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center relative z-10">
-        {/* Holographic logo */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-2xl sm:text-3xl font-extrabold cursor-pointer flex-shrink-0"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 py-4 flex justify-between items-center relative z-10">
+        {/* Logo */}
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="text-xl sm:text-2xl font-light cursor-pointer flex items-center gap-2 group"
           onClick={() => scrollToSection("home")}
-          aria-label="Scroll to top"
+          aria-label="Scroll to home"
         >
-          <span
-            className="text-transparent bg-clip-text bg-cyan-400 "
-            style={{
-              backgroundImage:
-                "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            &lt;DevZisan/&gt;
-          </span>
-          <span className="inline-block w-2 h-2 ml-1 bg-cyan-400 rounded-full animate-pulse"></span>
-        </motion.div>
+          <span className="text-white tracking-tight">&lt;DevZisan/&gt;</span>
+          <span className="w-1.5 h-1.5 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+        </motion.button>
 
-        {/* Futuristic desktop navigation */}
-        <nav className="hidden lg:flex">
-          <ul className="flex space-x-1">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <motion.button
-                  onHoverStart={() => setHoveredNav(item.id)}
-                  onHoverEnd={() => setHoveredNav(null)}
-                  onClick={() => scrollToSection(item.id)}
-                  className="relative px-4 py-2 rounded-lg group cursor-pointer"
-                >
-                  <span
-                    className="relative z-10 flex items-center gap-2 text-cyan-400 group-hover:text-white transition-colors duration-300"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to bottom,#052E16 1%,#18FFFF 55%,#052E16 99%)",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                      color: "transparent",
-                    }}
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex" aria-label="Main navigation">
+          <ul className="flex items-center space-x-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+
+              return (
+                <li key={item.id}>
+                  <motion.button
+                    onHoverStart={() => setHoveredNav(item.id)}
+                    onHoverEnd={() => setHoveredNav(null)}
+                    onClick={() => scrollToSection(item.id)}
+                    className="relative px-4 py-2 rounded group cursor-pointer"
+                    aria-label={`Navigate to ${item.name}`}
+                    aria-current={isActive ? "page" : undefined}
                   >
-                    <span className="text-white">{item.icon}</span>
-                    {item.name}
-                  </span>
-                  {hoveredNav === item.id && (
-                    <motion.div
-                      layoutId="navHover"
-                      className="absolute inset-0 bg-[#1e1e2e] rounded-lg border border-[#052E16] shadow-lg shadow-[#18FFFF]/20"
-                      transition={{ type: "spring", bounce: 0.25 }}
-                    />
-                  )}
-                </motion.button>
-              </li>
-            ))}
+                    <span
+                      className={`relative z-10 flex items-center gap-2 text-sm font-light tracking-wide transition-colors duration-300 ${
+                        isActive
+                          ? "text-white"
+                          : "text-neutral-400 group-hover:text-white"
+                      }`}
+                    >
+                      <span className="font-normal">{item.name}</span>
+                    </span>
+
+                    {/* Active underline */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSection"
+                        className="absolute bottom-0 left-0 right-0 h-px bg-white"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                  </motion.button>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        {/* Social links with holographic effect */}
-        <div className="hidden lg:flex items-center space-x-6 flex-shrink-0">
-          <div className="flex space-x-5">
-            {user.length !== 0
-              ? [
-                  {
-                    icon: FaGithub,
-                    link: user[0].socialLinks.github,
-                    color: "from-[#6e5494] to-[#c9510c]",
-                  },
-                  {
-                    icon: FaLinkedin,
-                    link: user[0].socialLinks.linkedin,
-                    color: "from-[#0077b5] to-[#00a0dc]",
-                  },
-                  {
-                    icon: FaFacebook,
-                    link: user[0].socialLinks.facebook,
-                    color: "from-[#1877f2] to-[#00b3ff]",
-                  },
-                ].map(({ icon: Icon, link, color }) => (
-                  <motion.a
-                    key={link}
-                    whileHover={{ y: -3 }}
-                    whileTap={{ scale: 0.9 }}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative p-2 rounded-full bg-[#1e1e2e] border border-[#3f3f46] shadow-sm hover:shadow-[0_0_15px_-3px_rgba(79,70,229,0.3)] transition-all duration-300"
-                  >
-                    <Icon
-                      className="text-[#a1a1aa] hover:text-white"
-                      size={18}
-                    />
-                    <span
-                      className={`absolute inset-0 rounded-full bg-gradient-to-br ${color} opacity-0 hover:opacity-20 -z-10 transition-opacity duration-300`}
-                    ></span>
-                  </motion.a>
-                ))
-              : Array(3)
-                  .fill("")
-                  .map((_, idx) => (
-                    <div
-                      key={idx}
-                      className="w-10 h-10 rounded-full bg-cyan-400 border border-[#3f3f46] animate-pulse"
-                    />
-                  ))}
-          </div>
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center space-x-6">
+          {/* Resume Download Button */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleResumeDownload}
+            className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-light text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 rounded transition-all duration-300"
+            aria-label="Download Resume"
+          >
+            <FaFileDownload className="text-base" />
+            <span className="hidden xl:inline">Resume</span>
+          </motion.button>
+
+          {/* Social Links */}
+          {socialLinks && (
+            <div className="flex items-center space-x-3 pl-6 border-l border-neutral-800">
+              {socialLinks.map(({ icon: Icon, link, label }) => (
+                <motion.a
+                  key={link}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-neutral-500 hover:text-white transition-colors duration-300"
+                  aria-label={label}
+                >
+                  <Icon className="text-base" />
+                </motion.a>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Mobile menu button with cyberpunk style */}
+        {/* Mobile Menu Button */}
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden text-[#a1a1aa] hover:text-white p-2 rounded-lg border border-[#3f3f46] bg-[#1e1e2e] relative overflow-hidden"
+          className="lg:hidden text-neutral-400 hover:text-white p-2 rounded border border-neutral-800 hover:border-neutral-700 transition-colors"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-          <span className="absolute inset-0 bg-gradient-to-r from-[#4f46e5] to-[#ec4899] opacity-0 hover:opacity-20 transition-opacity duration-300 -z-10"></span>
+          <AnimatePresence mode="wait">
+            {isMenuOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FaTimes size={18} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="open"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FaBars size={18} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.button>
       </div>
 
-      {/* Cyberpunk mobile menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-[#0a0a12] backdrop-blur-3xl border-t border-[#4f46e5]/20 shadow-2xl shadow-[#4f46e5]/10"
-          >
-            <nav className="flex flex-col p-6 space-y-4">
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.id}
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-left text-[#a1a1aa] hover:text-white transition-colors duration-300 text-lg font-medium py-3 px-4 rounded-lg hover:bg-[#1e1e2e] flex items-center gap-3"
-                >
-                  <span className="text-[#4f46e5] text-xl">{item.icon}</span>
-                  {item.name}
-                  <span className="ml-auto text-[#4f46e5]">→</span>
-                </motion.button>
-              ))}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setIsMenuOpen(false)}
+              aria-hidden="true"
+            />
 
-              <div className="pt-6 mt-4 border-t border-[#3f3f46]">
-                <h4 className="text-[#a1a1aa] text-sm uppercase tracking-wider mb-4">
-                  Connect
-                </h4>
-                <div className="flex space-x-6">
-                  {user.length !== 0
-                    ? [
-                        {
-                          icon: FaGithub,
-                          link: user[0].socialLinks.github,
-                          label: "GitHub",
-                        },
-                        {
-                          icon: FaLinkedin,
-                          link: user[0].socialLinks.linkedin,
-                          label: "LinkedIn",
-                        },
-                        {
-                          icon: FaFacebook,
-                          link: user[0].socialLinks.facebook,
-                          label: "Facebook",
-                        },
-                      ].map(({ icon: Icon, link, label }) => (
-                        <motion.a
-                          key={link}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          href={link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 rounded-full bg-[#1e1e2e] border border-[#3f3f46] text-[#a1a1aa] hover:text-white transition-colors duration-300"
-                          aria-label={label}
-                        >
-                          <Icon size={20} />
-                        </motion.a>
-                      ))
-                    : Array(3)
-                        .fill("")
-                        .map((_, idx) => (
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="lg:hidden z-50 fixed right-0 top-0 h-full w-[280px] sm:w-[320px] bg-neutral-950 border-l border-neutral-800/50 shadow-2xl"
+            >
+              <nav className="flex flex-col p-6 space-y-2 h-full overflow-y-auto">
+                {/* Close button */}
+                <div className="flex justify-end mb-6">
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 rounded hover:bg-neutral-900 transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <FaTimes className="text-neutral-400" size={18} />
+                  </motion.button>
+                </div>
+
+                {/* Navigation items */}
+                {navItems.map((item, idx) => {
+                  const Icon = item.icon;
+                  const isActive = activeSection === item.id;
+
+                  return (
+                    <motion.button
+                      key={item.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`cursor-pointer text-left transition-all duration-300 text-base font-light py-4 px-4 rounded flex items-center gap-3 group ${
+                        isActive
+                          ? "text-white bg-neutral-900/50 border-l-2 border-white"
+                          : "text-neutral-400 hover:text-white hover:bg-neutral-900/30 border-l-2 border-transparent"
+                      }`}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      <span className="flex-1">{item.name}</span>
+                      {isActive && <span className="text-xs">●</span>}
+                    </motion.button>
+                  );
+                })}
+
+                {/* Resume Download - Mobile */}
+                <motion.button
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleResumeDownload}
+                  className="cursor-pointer mt-4 flex items-center justify-center gap-2 py-3 px-4 text-sm font-light text-white bg-neutral-900/50 border border-neutral-700 hover:border-neutral-500 rounded transition-all duration-300"
+                  aria-label="Download Resume"
+                >
+                  <FaFileDownload />
+                  <span>Download Resume</span>
+                </motion.button>
+
+                {/* Social links section */}
+                <div className="pt-6 mt-auto border-t border-neutral-800/50">
+                  <h4 className="text-neutral-500 text-xs uppercase tracking-wider mb-4 font-light">
+                    Connect
+                  </h4>
+                  <div className="flex gap-3">
+                    {socialLinks
+                      ? socialLinks.map(({ icon: Icon, link, label }) => (
+                          <motion.a
+                            key={link}
+                            whileHover={{ scale: 1.1, y: -2 }}
+                            whileTap={{ scale: 0.9 }}
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 rounded bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300"
+                            aria-label={label}
+                          >
+                            <Icon size={18} />
+                          </motion.a>
+                        ))
+                      : [...Array(3)].map((_, idx) => (
                           <div
                             key={idx}
-                            className="w-12 h-12 rounded-full bg-[#1e1e2e] border border-[#3f3f46] animate-pulse"
+                            className="w-11 h-11 rounded bg-neutral-900/50 border border-neutral-800 animate-pulse"
                           />
                         ))}
+                  </div>
                 </div>
-              </div>
-            </nav>
-          </motion.div>
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

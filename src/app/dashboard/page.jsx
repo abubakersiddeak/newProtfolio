@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaReact, FaNodeJs, FaPython, FaGitAlt, FaFigma } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -15,167 +15,199 @@ import {
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 import { VscVscode } from "react-icons/vsc";
-// import { projects as initialProjects } from "../db/projects";
 import SideNavbar from "./components/SideNavbar";
 import SkillsDisplay from "./components/SkillsDisplay";
 import ProjectsDisplay from "./components/ProjectsDisplay";
 import ManageSkills from "./components/ManageSkils";
 import ManageProjects from "./components/ManageProjects";
 import ManageUser from "./components/ManageUser";
-const generateUniqueId = () => crypto.randomUUID();
 
-const initialSkills = [
+// Move constant data outside component to prevent recreation on every render
+const INITIAL_SKILLS = [
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "React",
     icon: <FaReact className="text-sky-500" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "TailwindCSS",
     icon: <SiTailwindcss className="text-cyan-400" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "Framer Motion",
     icon: <TbBrandFramerMotion className="text-purple-500" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "Next.JS",
     icon: <SiNextdotjs className="text-white" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "JavaScript",
     icon: <SiJavascript className="text-yellow-400" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "Node.js",
     icon: <FaNodeJs className="text-green-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "Express.JS",
     icon: <SiExpress className="text-gray-200" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "Auth.JS",
     icon: <SiAuth0 className="text-orange-500" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Web",
     name: "MongoDB",
     icon: <SiMongodb className="text-green-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Programming",
     name: "JavaScript",
     icon: <SiJavascript className="text-yellow-400" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Programming",
     name: "Python",
     icon: <FaPython className="text-blue-400" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Programming",
     name: "Node.js",
     icon: <FaNodeJs className="text-green-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "Git",
     icon: <FaGitAlt className="text-orange-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "VS Code",
     icon: <VscVscode className="text-blue-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "NPM/Yarn",
     icon: <SiNpm className="text-red-600" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "Figma",
     icon: <FaFigma className="text-pink-500" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "Gimp",
     icon: <SiGimp className="text-sky-300" />,
   },
   {
-    id: generateUniqueId(),
+    id: crypto.randomUUID(),
     category: "Tools",
     name: "Inkscape",
     icon: <SiInkscape className="text-indigo-300" />,
   },
 ];
 
-export default function Page() {
-  const [activeSection, setActiveSection] = useState("portfolio"); //
-  const [skills, setSkills] = useState(initialSkills);
-  const [projects, setProjects] = useState([]);
-  useEffect(() => {
-    async function getProjects() {
-      try {
-        const res = await fetch("/api/project");
-        const projects = await res.json();
+// Memoized component map for better performance
+const SECTION_COMPONENTS = {
+  portfolio: ({ skills, projects }) => (
+    <>
+      <SkillsDisplay skills={skills} />
+      <ProjectsDisplay projects={projects} />
+    </>
+  ),
+  "manage-skills": ({ skills, setSkills }) => (
+    <ManageSkills skills={skills} setSkills={setSkills} />
+  ),
+  "manage-projects": ({ projects, setProjects }) => (
+    <ManageProjects projects={projects} setProjects={setProjects} />
+  ),
+  "manage-users": () => <ManageUser />,
+};
 
-        setProjects(projects);
-      } catch (error) {
-        console.log("Project fetch failed ");
+export default function Page() {
+  const [activeSection, setActiveSection] = useState("portfolio");
+  const [skills, setSkills] = useState(INITIAL_SKILLS);
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Memoize fetch function
+  const fetchProjects = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const res = await fetch("/api/project");
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
+
+      const data = await res.json();
+      setProjects(data);
+      setError(null);
+    } catch (error) {
+      console.error("Project fetch failed:", error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
-    getProjects();
   }, []);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
+
+  // Render active section component
+  const ActiveComponent = SECTION_COMPONENTS[activeSection];
 
   return (
     <div className="bg-gray-900 font-sans min-h-screen flex">
       <SideNavbar setActiveSection={setActiveSection} />
 
-      <div className="flex-1 ml-64">
-        <main>
-          {activeSection === "portfolio" && (
-            <>
-              <SkillsDisplay skills={skills} />
-              <ProjectsDisplay projects={projects} />
-            </>
-          )}
-
-          {activeSection === "manage-skills" && (
-            <ManageSkills skills={skills} setSkills={setSkills} />
-          )}
-
-          {activeSection === "manage-projects" && (
-            <ManageProjects projects={projects} setProjects={setProjects} />
-          )}
-          {activeSection === "manage-users" && <ManageUser />}
-        </main>
-      </div>
+      <main className="flex-1 ml-64">
+        {isLoading && activeSection === "portfolio" ? (
+          <div className="flex items-center justify-center h-screen">
+            <p className="text-white">Loading projects...</p>
+          </div>
+        ) : error ? (
+          <div className="flex items-center justify-center h-screen">
+            <p className="text-red-500">Error: {error}</p>
+          </div>
+        ) : (
+          <ActiveComponent
+            skills={skills}
+            setSkills={setSkills}
+            projects={projects}
+            setProjects={setProjects}
+          />
+        )}
+      </main>
     </div>
   );
 }
