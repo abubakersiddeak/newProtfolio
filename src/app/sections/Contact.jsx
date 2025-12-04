@@ -139,7 +139,7 @@ const Contact = () => {
             </span>
           </div>
 
-          <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-light text-white leading-tight tracking-tight max-w-3xl">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white leading-tight tracking-tight overflow-hidden">
             Let's work together on your{" "}
             <span className="text-neutral-400">next project</span>
           </h2>

@@ -321,7 +321,7 @@ const AboutWithSkills = ({ user }) => {
     <section
       id="about"
       ref={container}
-      className="about-section relative min-h-screen flex items-center py-5 sm:py-14 md:py-18 lg:py-22 text-white overflow-hidden"
+      className="about-section relative min-h-screen flex items-center py-5 sm:py-14 md:py-18 lg:py-22 text-white  overflow-hidden"
     >
       {/* Animated Background Gradient */}
       <motion.div
@@ -512,8 +512,8 @@ const AboutWithSkills = ({ user }) => {
             viewport={{ once: true, margin: "-100px" }}
           >
             {/* Name & Title */}
-            <motion.div className="space-y-3" variants={itemVariants}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight tracking-tight overflow-hidden">
+            <motion.div className="space-y-1" variants={itemVariants}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white leading-tight tracking-tight overflow-hidden">
                 <TextReveal>{firstName}</TextReveal>{" "}
                 <TextReveal delay={0.1}>
                   <span className="text-neutral-500">{lastName}</span>
@@ -563,7 +563,7 @@ const AboutWithSkills = ({ user }) => {
 
             {/* Description */}
             <motion.div
-              className="space-y-4 text-sm sm:text-base text-neutral-400 leading-relaxed font-light"
+              className="space-y-4 text-sm  text-neutral-400 leading-relaxed font-light"
               variants={itemVariants}
             >
               <motion.p
@@ -592,7 +592,7 @@ const AboutWithSkills = ({ user }) => {
 
             {/* Skills Section */}
             <motion.div
-              className="skills-section pt-6 space-y-6"
+              className="skills-section pt-2 space-y-6"
               variants={itemVariants}
             >
               {/* Animated Divider */}

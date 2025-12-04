@@ -146,148 +146,150 @@ const Header = ({ user }) => {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-neutral-950/95 backdrop-blur-xl border-b border-neutral-800/50 shadow-lg shadow-black/10"
-          : "bg-transparent"
-      }`}
-    >
-      {/* Simplified background grid */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
-      </div>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          scrolled
+            ? "bg-neutral-950/95 backdrop-blur-xl border-b border-neutral-800/50 shadow-lg shadow-black/10"
+            : "bg-transparent"
+        }`}
+      >
+        {/* Simplified background grid */}
+        <div className="absolute inset-0 overflow-hidden opacity-[0.02] pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 py-4 flex justify-between items-center relative z-10">
-        {/* Logo */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="text-xl sm:text-2xl font-light cursor-pointer flex items-center gap-2 group"
-          onClick={() => scrollToSection("home")}
-          aria-label="Scroll to home"
-        >
-          <span className="text-white tracking-tight">&lt;DevZisan/&gt;</span>
-          <span className="w-1.5 h-1.5 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
-        </motion.button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 py-4 flex justify-between items-center relative z-10">
+          {/* Logo */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="text-xl sm:text-2xl font-light cursor-pointer flex items-center gap-2 group"
+            onClick={() => scrollToSection("home")}
+            aria-label="Scroll to home"
+          >
+            <span className="text-white tracking-tight">&lt;DevZisan/&gt;</span>
+            <span className="w-1.5 h-1.5 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+          </motion.button>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex" aria-label="Main navigation">
-          <ul className="flex items-center space-x-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeSection === item.id;
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex" aria-label="Main navigation">
+            <ul className="flex items-center space-x-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
 
-              return (
-                <li key={item.id}>
-                  <motion.button
-                    onHoverStart={() => setHoveredNav(item.id)}
-                    onHoverEnd={() => setHoveredNav(null)}
-                    onClick={() => scrollToSection(item.id)}
-                    className="relative px-4 py-2 rounded group cursor-pointer"
-                    aria-label={`Navigate to ${item.name}`}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    <span
-                      className={`relative z-10 flex items-center gap-2 text-sm font-light tracking-wide transition-colors duration-300 ${
-                        isActive
-                          ? "text-white"
-                          : "text-neutral-400 group-hover:text-white"
-                      }`}
+                return (
+                  <li key={item.id}>
+                    <motion.button
+                      onHoverStart={() => setHoveredNav(item.id)}
+                      onHoverEnd={() => setHoveredNav(null)}
+                      onClick={() => scrollToSection(item.id)}
+                      className="relative px-4 py-2 rounded group cursor-pointer"
+                      aria-label={`Navigate to ${item.name}`}
+                      aria-current={isActive ? "page" : undefined}
                     >
-                      <span className="font-normal">{item.name}</span>
-                    </span>
+                      <span
+                        className={`relative z-10 flex items-center gap-2 text-sm font-light tracking-wide transition-colors duration-300 ${
+                          isActive
+                            ? "text-white"
+                            : "text-neutral-400 group-hover:text-white"
+                        }`}
+                      >
+                        <span className="font-normal">{item.name}</span>
+                      </span>
 
-                    {/* Active underline */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute bottom-0 left-0 right-0 h-px bg-white"
-                        transition={{
-                          type: "spring",
-                          bounce: 0.2,
-                          duration: 0.6,
-                        }}
-                      />
-                    )}
-                  </motion.button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+                      {/* Active underline */}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeSection"
+                          className="absolute bottom-0 left-0 right-0 h-px bg-white"
+                          transition={{
+                            type: "spring",
+                            bounce: 0.2,
+                            duration: 0.6,
+                          }}
+                        />
+                      )}
+                    </motion.button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-6">
-          {/* Resume Download Button */}
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center space-x-6">
+            {/* Resume Download Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleResumeDownload}
+              className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-light text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 rounded transition-all duration-300"
+              aria-label="Download Resume"
+            >
+              <FaFileDownload className="text-base" />
+              <span className="hidden xl:inline">Resume</span>
+            </motion.button>
+
+            {/* Social Links */}
+            {socialLinks && (
+              <div className="flex items-center space-x-3 pl-6 border-l border-neutral-800">
+                {socialLinks.map(({ icon: Icon, link, label }) => (
+                  <motion.a
+                    key={link}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-neutral-500 hover:text-white transition-colors duration-300"
+                    aria-label={label}
+                  >
+                    <Icon className="text-base" />
+                  </motion.a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleResumeDownload}
-            className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-light text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 rounded transition-all duration-300"
-            aria-label="Download Resume"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden text-neutral-400 hover:text-white p-2 rounded border border-neutral-800 hover:border-neutral-700 transition-colors relative z-50"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
-            <FaFileDownload className="text-base" />
-            <span className="hidden xl:inline">Resume</span>
-          </motion.button>
-
-          {/* Social Links */}
-          {socialLinks && (
-            <div className="flex items-center space-x-3 pl-6 border-l border-neutral-800">
-              {socialLinks.map(({ icon: Icon, link, label }) => (
-                <motion.a
-                  key={link}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 text-neutral-500 hover:text-white transition-colors duration-300"
-                  aria-label={label}
+            <AnimatePresence mode="wait">
+              {isMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Icon className="text-base" />
-                </motion.a>
-              ))}
-            </div>
-          )}
+                  <FaTimes size={18} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="open"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <FaBars size={18} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
+      </header>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden text-neutral-400 hover:text-white p-2 rounded border border-neutral-800 hover:border-neutral-700 transition-colors"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
-        >
-          <AnimatePresence mode="wait">
-            {isMenuOpen ? (
-              <motion.div
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <FaTimes size={18} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="open"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <FaBars size={18} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Outside of header for proper z-index stacking */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -297,7 +299,7 @@ const Header = ({ user }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm"
+              className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[60]"
               onClick={() => setIsMenuOpen(false)}
               aria-hidden="true"
             />
@@ -308,7 +310,7 @@ const Header = ({ user }) => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="lg:hidden z-50 fixed right-0 top-0 h-full w-[280px] sm:w-[320px] bg-neutral-950 border-l border-neutral-800/50 shadow-2xl"
+              className="lg:hidden fixed right-0 top-0 h-full w-[280px] sm:w-[320px] bg-neutral-950 border-l border-neutral-800/50 shadow-2xl z-[70]"
             >
               <nav className="flex flex-col p-6 space-y-2 h-full overflow-y-auto">
                 {/* Close button */}
@@ -397,7 +399,7 @@ const Header = ({ user }) => {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 

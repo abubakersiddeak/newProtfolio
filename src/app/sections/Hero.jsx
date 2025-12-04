@@ -133,12 +133,12 @@ const Hero = ({ user }) => {
 
             {/* Main Heading */}
             <div className="space-y-2 sm:space-y-3">
-              <h1 className="fade-in-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-[0.9] tracking-tight">
+              <h1 className="fade-in-2 text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-light text-white leading-[0.9] tracking-tight">
                 {userName}
               </h1>
 
               {/* Typing Effect */}
-              <div className="fade-in-3 flex items-center justify-center lg:justify-start text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-neutral-400 font-light min-h-[28px] sm:min-h-[32px] md:min-h-[36px] tracking-tight">
+              <div className="fade-in-3 flex items-center justify-center lg:justify-start text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl text-neutral-400 font-light min-h-[28px] sm:min-h-[32px] md:min-h-[36px] tracking-tight">
                 <Suspense fallback={<span>Developer</span>}>
                   <TypingTextEffect texts={texts} />
                 </Suspense>
