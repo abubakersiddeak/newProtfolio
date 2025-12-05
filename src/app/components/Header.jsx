@@ -136,10 +136,10 @@ const Header = ({ user }) => {
 
   // Resume download handler
   const handleResumeDownload = () => {
-    const resumeUrl = user?.[0]?.resume || "/resume.pdf";
+    const resumeUrl = user?.[0]?.resume || "/AbubakarSiddik_Resume.pdf";
     const link = document.createElement("a");
     link.href = resumeUrl;
-    link.download = "Resume.pdf";
+    link.download = "AbubakarSiddik_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

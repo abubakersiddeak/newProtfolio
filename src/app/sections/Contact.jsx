@@ -133,7 +133,7 @@ const Contact = () => {
         {/* Header */}
         <div className="contact-header mb-12 sm:mb-16 md:mb-20">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-px bg-gradient-to-r from-white/20 to-transparent" />
+            <div className="header-line w-12 h-px bg-gradient-to-r from-white/40 to-transparent" />
             <span className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl text-neutral-400 tracking-[0.2em] uppercase font-light">
               Get In Touch
             </span>

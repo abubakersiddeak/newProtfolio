@@ -106,7 +106,7 @@ const Projects = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="fade-in-about mb-2 sm:mb-6 md:mb-10">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-px bg-gradient-to-r from-white/20 to-transparent" />
+            <div className="header-line w-12 h-px bg-gradient-to-r from-white/40 to-transparent" />
             <span className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl text-neutral-500 tracking-[0.2em] uppercase font-light">
               Projects
             </span>
