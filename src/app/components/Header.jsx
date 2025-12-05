@@ -225,7 +225,7 @@ const Header = ({ user }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleResumeDownload}
-              className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-light text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 rounded transition-all duration-300"
+              className="cursor-pointer flex items-center gap-2 px-4 py-2 text-sm font-light text-neutral-400 hover:text-white border border-neutral-700 hover:border-neutral-500 transition-all duration-300"
               aria-label="Download Resume"
             >
               <FaFileDownload className="text-base" />
