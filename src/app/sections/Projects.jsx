@@ -101,7 +101,7 @@ const Projects = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative py-5 sm:py-14 md:py-18 lg:py-22  text-white overflow-hidden"
+      className=" relative py-5 sm:py-14 md:py-18 lg:py-22  text-white overflow-hidden"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="fade-in-about mb-2 sm:mb-6 md:mb-10">
@@ -447,7 +447,7 @@ const Projects = () => {
                         {selectedProject.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2 py-1 text-[10px] sm:text-xs bg-white/5 border border-white/10 rounded-md text-neutral-300"
+                            className="px-2 py-1 text-[10px] sm:text-xs bg-white/5 border border-white/10  text-neutral-300"
                           >
                             {tech}
                           </span>

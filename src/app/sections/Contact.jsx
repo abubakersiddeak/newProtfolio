@@ -119,7 +119,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={container}
-      className="about-section relative min-h-screen flex items-center py-5 sm:py-14 md:py-18 lg:py-22  text-white overflow-hidden"
+      className=" relative min-h-screen flex items-center py-5 text-white overflow-hidden"
     >
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none">

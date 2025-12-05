@@ -124,8 +124,8 @@ const Hero = ({ user }) => {
           {/* Text Content */}
           <div className="hero-text-content lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-7 md:space-y-8 order-2 lg:order-1">
             {/* Label */}
-            <div className="fade-in-1 inline-flex items-center gap-2 mx-auto lg:mx-0">
-              <div className="w-8 sm:w-10 md:w-12 h-px bg-gradient-to-r from-transparent to-neutral-700" />
+            <div className="hidden lg:inline-flex fade-in-1  items-center gap-2 mx-auto lg:mx-0">
+              <div className=" w-8 sm:w-10 md:w-12 h-px bg-gradient-to-r from-transparent to-neutral-700" />
               <span className="text-[10px] sm:text-xs text-neutral-500 tracking-[0.15em] sm:tracking-[0.2em] uppercase font-light whitespace-nowrap">
                 Portfolio 2025
               </span>
@@ -133,7 +133,7 @@ const Hero = ({ user }) => {
 
             {/* Main Heading */}
             <div className="space-y-2 sm:space-y-3">
-              <h1 className="fade-in-2 text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-light text-white leading-[0.9] tracking-tight">
+              <h1 className="fade-in-2 text-3xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-5xl font-light text-white leading-[0.9] tracking-tight">
                 {userName}
               </h1>
 
@@ -204,7 +204,7 @@ const Hero = ({ user }) => {
 
             {/* Tech Stack */}
             <div className="fade-in-5 hidden sm:block pt-6 md:pt-8 border-t border-neutral-800/50 mx-4 lg:mx-0">
-              <p className="text-[10px] sm:text-xs text-neutral-600 tracking-widest uppercase mb-3 sm:mb-4 font-light">
+              <p className="text-[10px] sm:text-xs text-neutral-400 tracking-widest uppercase mb-3 sm:mb-4 font-light">
                 Tech Stack
               </p>
               <div className="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-2">
@@ -225,7 +225,7 @@ const Hero = ({ user }) => {
               {techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 text-[10px] text-neutral-500 bg-neutral-900/50 border border-neutral-800 rounded-full font-light tracking-wide"
+                  className="px-3 py-1.5 text-[10px] text-neutral-500 bg-neutral-900/50 border border-neutral-800  font-light tracking-wide"
                 >
                   {tech}
                 </span>
@@ -235,7 +235,7 @@ const Hero = ({ user }) => {
 
           {/* Profile Image */}
           <div className="hero-image-content lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="hero-image relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-full lg:h-[400px] xl:h-[500px] 2xl:h-[600px] group">
+            <div className="hero-image relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-full lg:h-[400px] xl:h-[450px] 2xl:h-[550px] group">
               {/* Image Container */}
               <div className="relative w-full h-full overflow-hidden bg-neutral-900">
                 {/* Image */}

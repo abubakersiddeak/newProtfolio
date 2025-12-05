@@ -321,7 +321,7 @@ const AboutWithSkills = ({ user }) => {
     <section
       id="about"
       ref={container}
-      className="about-section relative min-h-screen flex items-center py-5 sm:py-14 md:py-18 lg:py-22 text-white  overflow-hidden"
+      className="about-section relative min-h-screen flex items-center py-2  text-white  overflow-hidden"
     >
       {/* Animated Background Gradient */}
       <motion.div
@@ -395,7 +395,7 @@ const AboutWithSkills = ({ user }) => {
           {/* Image Side */}
           <div className="lg:col-span-5 order-1 lg:order-1">
             <motion.div
-              className="about-image relative w-full aspect-[3/4] max-w-md mx-auto lg:mx-0"
+              className="about-image relative w-54 md:w-[90%] aspect-[4/5] max-w-md mx-auto lg:mx-0"
               style={{
                 transform: `translate(${mousePosition.x * 0.3}px, ${
                   mousePosition.y * 0.3
@@ -478,7 +478,7 @@ const AboutWithSkills = ({ user }) => {
               </motion.div>
 
               {/* Floating Badge */}
-              <motion.div
+              {/* <motion.div
                 className="absolute -right-2 sm:-right-4 top-1/4 bg-black/80 backdrop-blur-sm border border-neutral-800 px-3 py-2"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -499,21 +499,21 @@ const AboutWithSkills = ({ user }) => {
                     Available
                   </span>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </div>
 
           {/* Content Side */}
           <motion.div
-            className="lg:col-span-7 order-2 lg:order-2 about-content space-y-8 sm:space-y-10"
+            className="lg:col-span-7 order-2  about-content space-y-2 sm:space-y-3"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
             {/* Name & Title */}
-            <motion.div className="space-y-1" variants={itemVariants}>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white leading-tight tracking-tight overflow-hidden">
+            <motion.div className="" variants={itemVariants}>
+              <h2 className="text-2xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-white leading-tight tracking-tight overflow-hidden">
                 <TextReveal>{firstName}</TextReveal>{" "}
                 <TextReveal delay={0.1}>
                   <span className="text-neutral-500">{lastName}</span>
@@ -592,14 +592,14 @@ const AboutWithSkills = ({ user }) => {
 
             {/* Skills Section */}
             <motion.div
-              className="skills-section pt-2 space-y-6"
+              className="skills-section pt-2 space-y-4"
               variants={itemVariants}
             >
               {/* Animated Divider */}
               <div className="skills-divider h-px bg-gradient-to-r from-neutral-800/50 via-neutral-700/50 to-transparent" />
 
               {/* Tabs */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {Object.keys(skillCategories).map((tab) => (
                   <MagneticButton
                     key={tab}
@@ -619,7 +619,7 @@ const AboutWithSkills = ({ user }) => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4"
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
