@@ -321,7 +321,7 @@ const AboutWithSkills = ({ user }) => {
     <section
       id="about"
       ref={container}
-      className="about-section relative min-h-screen  flex items-center py-10  text-white  overflow-hidden"
+      className="about-section relative min-h-screen  flex items-center py-1 md:py-10  text-white  overflow-hidden"
     >
       {/* Animated Background Gradient */}
       <motion.div
