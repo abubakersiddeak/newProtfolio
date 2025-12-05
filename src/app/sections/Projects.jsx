@@ -101,7 +101,7 @@ const Projects = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className=" relative py-5 sm:py-14 md:py-18 lg:py-22  text-white overflow-hidden"
+      className=" relative py-10   text-white overflow-hidden"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="fade-in-about mb-2 sm:mb-6 md:mb-10">

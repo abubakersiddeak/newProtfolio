@@ -103,7 +103,7 @@ const Hero = ({ user }) => {
     <section
       id="home"
       ref={container}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden  text-white"
+      className="relative min-h-screen  flex items-center justify-center overflow-hidden  text-white"
     >
       {/* Background Components */}
       <Suspense fallback={null}>
